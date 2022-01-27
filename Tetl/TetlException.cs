@@ -30,7 +30,10 @@ namespace Tetl
     
     public class TetlInvalidAdditionException : TetlBaseException
     {
-        
+    }
+
+    public class TetlInvalidSubtractException : TetlBaseException
+    {
     }
 
     public class TetlInvalidMultiplicationException : TetlBaseException

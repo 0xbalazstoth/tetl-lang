@@ -54,6 +54,12 @@ catch (TetlInvalidAdditionException e)
     ProcessInformation($"[INFO]: {e.Left}, {e.Right}", ConsoleColor.DarkYellow);
     ProcessInformation($"[ERROR]: {e.ErrorMessage}", ConsoleColor.DarkRed);
 }
+catch (TetlInvalidSubtractException e)
+{
+    ProcessInformation($"[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
+    ProcessInformation($"[INFO]: {e.Left}, {e.Right}", ConsoleColor.DarkYellow);
+    ProcessInformation($"[ERROR]: {e.ErrorMessage}", ConsoleColor.DarkRed);
+}
 catch (TetlInvalidMultiplicationException e)
 {
     ProcessInformation($"[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);

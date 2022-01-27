@@ -223,7 +223,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
 
         if (left?.GetType() == null && right?.GetType() == null)
         {
-            throw new TetlInvalidAdditionException()
+            throw new TetlInvalidSubtractException()
             {
                 ErrorMessage = "Both values are null!",
                 Left = $"{nameof(left)}: {left}",
@@ -233,7 +233,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
         else if ((left?.GetType() == null && right?.GetType() != null) ||
                  (left?.GetType() != null && right?.GetType() == null))
         {
-            throw new TetlInvalidAdditionException()
+            throw new TetlInvalidSubtractException()
             {
                 ErrorMessage = "Cannot subtract null value!",
                 Left = $"{nameof(left)}: {left}",
@@ -242,7 +242,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
         }
         else
         {
-            throw new TetlInvalidAdditionException()
+            throw new TetlInvalidSubtractException()
             {
                 ErrorMessage = $"Cannot subtract values of types {left?.GetType()} and {right?.GetType()}",
                 Left = $"{nameof(left)}: {left}",

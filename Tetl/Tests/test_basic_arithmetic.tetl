@@ -1,8 +1,8 @@
 >> Basic arithmetic tests
 
 >> Multiplication :: *
-t1 = 10 * 5; >> 50 >> 50
-t2 = 5.2 * 2; >> 10.4 >> 10.4
+t1 = 11 * 5; >> 50
+t2 = 5.2 * 2; >> 10.4
 t3 = 10.10 * 6.7; >> 67.67
 >> t4 = true * 4; >> TetlInvalidMultiplicationException
 OutNewLine(t1 + " " + t2 + " " + t3);
@@ -21,4 +21,18 @@ t8 = 5 % 2; >> 1
 t9 = 11.76 % 23; >> 11.76
 >> t10 = true % 20; >> TetlInvalidModulusException
 OutNewLine(t8 + " " + t9);
-OutNewLine();
+OutNewLine("");
+
+>> Addition :: +
+t11 = 5.4 + 10; >> 15.4
+t12 = 70 + 71; >> 141
+>> t13 = 5 + true; >> InvalidAdditionException
+OutNewLine(t11 + " " + t12);
+OutNewLine("");
+
+>> Subtract :: -
+t14 = 5 - 5; >> 0
+t15 = 6.4 - 10.99; >> -4,5899997
+t16 = "asd" - 54; >> TetlInvalidSubtractException
+OutNewLine(t14 + " " + t15);
+OutNewLine("");
