@@ -1,0 +1,61 @@
+>> Comparison tests
+
+>> Equals :: ==
+t1 = "orange" == "apple"; >> false
+t2 = 5 == 5; >> true
+t3 = true == false; >> false
+>> t4 = 5 != false; >> TetlCannotCompareValuesException
+
+OutNewLine("Equals");
+OutNewLine(t1 + " " + t2 + " " + t3);
+OutNewLine("");
+
+>> Not equals :: !=
+t5 = "orange" != "apple"; >> true
+t6 = 5 != 5; >> false
+t7 = true != false; >> true
+>> t8 = 5 != "orange"; >> TetlCannotCompareValuesException
+
+OutNewLine("Not equals");
+OutNewLine(t5 + " " + t6 + " " + t7);
+OutNewLine("");
+
+>> Greater than :: >
+t9 = 5 > 6; >> false
+t10 = 5.12 > 5; >> true
+>> t11 = true > false; >> TetlCannotCompareValuesException
+>> t12 = "test" > 23; >> TetlCannotCompareValuesException
+
+OutNewLine("Greater than");
+OutNewLine(t9 + " " + t10);
+OutNewLine("");
+
+>> Less than :: >
+t13 = 5 < 6; >> true
+t14 = 5.12 < 5; >> false
+>> t15 = true < false; >> TetlCannotCompareValuesException
+>> t16 = "test" < 22; >> TetlCannotCompareValuesException
+
+OutNewLine("Less than");
+OutNewLine(t13 + " " + t14);
+OutNewLine("");
+
+>> Greater than or equal :: >=
+t17 = 6 >= 6; >> true
+t18 = 5.12 >= 6; >> false
+>> t19 = true >= false; >> TetlCannotCompareValuesException
+>> t20 = "test" >= 22; >> TetlCannotCompareValuesException
+
+OutNewLine("Greater than or equal");
+OutNewLine(t17 + " " + t18);
+OutNewLine("");
+
+>> Less than or equal :: >=
+t21 = 6 <= 6; >> true
+t22 = 5.12 <= 6; >> false
+>> t23 = true <= false; >> TetlCannotCompareValuesException
+>> t24 = "test" <= 22; >> TetlCannotCompareValuesException
+
+OutNewLine("Less than or equal");
+OutNewLine(t21 + " " + t22);
+OutNewLine("");

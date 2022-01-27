@@ -1,0 +1,5 @@
+>>[Comparison]
+i = 5 < 3; >> false
+i = 6 > 5; >> true
+i = 5 + 5; >> 10
+i = "asd"; >> -5

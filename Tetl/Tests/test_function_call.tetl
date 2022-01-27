@@ -1,0 +1,4 @@
+>> Function call tests
+
+OutNewLine("Testing..."); >> Testing...
+Hey(); >> TetlFunctionNotDefinedException

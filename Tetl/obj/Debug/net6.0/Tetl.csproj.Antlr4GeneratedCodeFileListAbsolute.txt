@@ -1,0 +1,6 @@
+C:\Users\rpgix\RiderProjects\Tetl\Tetl\obj\Debug\net6.0\TetlLexer.cs
+C:\Users\rpgix\RiderProjects\Tetl\Tetl\obj\Debug\net6.0\TetlParser.cs
+C:\Users\rpgix\RiderProjects\Tetl\Tetl\obj\Debug\net6.0\TetlListener.cs
+C:\Users\rpgix\RiderProjects\Tetl\Tetl\obj\Debug\net6.0\TetlBaseListener.cs
+C:\Users\rpgix\RiderProjects\Tetl\Tetl\obj\Debug\net6.0\TetlVisitor.cs
+C:\Users\rpgix\RiderProjects\Tetl\Tetl\obj\Debug\net6.0\TetlBaseVisitor.cs

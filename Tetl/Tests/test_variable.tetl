@@ -1,0 +1,7 @@
+>> Variable tests
+
+counter = 0; >> 0
+counter = counter + 1; >> 1
+OutNewLine(counter); >> 1
+
+OutNewLine(hi); >> TetlVariableNotDefinedException

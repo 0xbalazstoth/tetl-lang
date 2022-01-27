@@ -1,0 +1,24 @@
+>> Basic arithmetic tests
+
+>> Multiplication :: *
+t1 = 10 * 5; >> 50 >> 50
+t2 = 5.2 * 2; >> 10.4 >> 10.4
+t3 = 10.10 * 6.7; >> 67.67
+>> t4 = true * 4; >> TetlInvalidMultiplicationException
+OutNewLine(t1 + " " + t2 + " " + t3);
+OutNewLine("");
+
+>> Division :: /
+t5 = 5 / 2; >> 2.5
+t6 = 5.2 / 5.4; >> 0.9629629
+t7 = 10 / 4.2; >> 2.3809526
+>> t8 = "orange" / 5; >> TetlInvalidDivisionException
+OutNewLine(t5 + " " + t6 + " " + t7);
+OutNewLine("");
+
+>> Modulus :: %
+t8 = 5 % 2; >> 1
+t9 = 11.76 % 23; >> 11.76
+>> t10 = true % 20; >> TetlInvalidModulusException
+OutNewLine(t8 + " " + t9);
+OutNewLine();
