@@ -15,14 +15,13 @@ block: '{' line* '}';
 
 WHILE: 'while' | 'until';
 
-array: '[' ( expression ( ',' expression )* )? ']';
-
 IF: 'if';
 ELSE: 'else';
 
 assignment: IDENTIFIER '=' expression;
 
 functionCall: IDENTIFIER '(' (expression (',' expression)*)? ')';
+arrayInit: '[' expression (',' expression)* ']';
 
 expression
 	: constant								#constantExpression
@@ -30,6 +29,7 @@ expression
 	| functionCall							#functionCallExpression
 	| '(' expression ')'					#parenthesizedExpression
 	| '!' expression						#notExpression
+	| arrayInit                             #arrayExpression
 	| expression multOp expression			#multiplicativeExpression
 	| expression addOp expression			#additiveExpression
 	| expression compareOp expression		#comparisonExpression

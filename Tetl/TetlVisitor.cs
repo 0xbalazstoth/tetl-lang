@@ -14,9 +14,6 @@ public class TetlVisitor : TetlBaseVisitor<object?>
 
     public TetlVisitor()
     {
-        Variables["E"] = Math.E;
-        Variables["pi"] = Math.PI;
-
         Variables["Out"] = new Func<object?[], object?>(Out);
         Variables["OutNewLine"] = new Func<object?[], object?>(OutNewLine);
     }
@@ -76,6 +73,19 @@ public class TetlVisitor : TetlBaseVisitor<object?>
 
         return null;
     }
+    
+    #region Array
+    public override object? VisitArrayInit(TetlParser.ArrayInitContext context)
+    {
+        List<object?> values = new List<object?>();
+        foreach (TetlParser.ExpressionContext value in context.expression())
+        {
+            values.Add(Visit(value));
+        }
+
+        return values;
+    }
+    #endregion
 
     public override object? VisitIdentifierExpression(TetlParser.IdentifierExpressionContext context)
     {

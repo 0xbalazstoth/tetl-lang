@@ -25,7 +25,7 @@ else
 OutNewLine("");
 
 >> If/else/else if condition
-t3 = 5.4;
+t3 = 5.7;
 if (t3 == 5.4)
 {
     OutNewLine("5.4");

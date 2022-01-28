@@ -49,6 +49,14 @@ public interface ITetlVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitConstantExpression([NotNull] TetlParser.ConstantExpressionContext context);
 
 	/// <summary>
+	/// Visit a parse tree produced by the <c>arrayExpression</c>
+	/// labeled alternative in <see cref="TetlParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitArrayExpression([NotNull] TetlParser.ArrayExpressionContext context);
+
+	/// <summary>
 	/// Visit a parse tree produced by the <c>additiveExpression</c>
 	/// labeled alternative in <see cref="TetlParser.expression"/>.
 	/// </summary>
@@ -154,13 +162,6 @@ public interface ITetlVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitBlock([NotNull] TetlParser.BlockContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="TetlParser.array"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitArray([NotNull] TetlParser.ArrayContext context);
-
-	/// <summary>
 	/// Visit a parse tree produced by <see cref="TetlParser.assignment"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -173,6 +174,13 @@ public interface ITetlVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitFunctionCall([NotNull] TetlParser.FunctionCallContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="TetlParser.arrayInit"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitArrayInit([NotNull] TetlParser.ArrayInitContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="TetlParser.expression"/>.
