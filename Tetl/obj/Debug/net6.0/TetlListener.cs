@@ -272,6 +272,17 @@ public interface ITetlListener : IParseTreeListener {
 	void ExitArrayInit([NotNull] TetlParser.ArrayInitContext context);
 
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="TetlParser.nExpression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterNExpression([NotNull] TetlParser.NExpressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="TetlParser.nExpression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitNExpression([NotNull] TetlParser.NExpressionContext context);
+
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="TetlParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

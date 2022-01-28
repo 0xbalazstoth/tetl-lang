@@ -183,6 +183,13 @@ public interface ITetlVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitArrayInit([NotNull] TetlParser.ArrayInitContext context);
 
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="TetlParser.nExpression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitNExpression([NotNull] TetlParser.NExpressionContext context);
+
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="TetlParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

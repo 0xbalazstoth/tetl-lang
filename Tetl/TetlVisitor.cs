@@ -11,6 +11,7 @@ namespace Tetl;
 public class TetlVisitor : TetlBaseVisitor<object?>
 {
     private Dictionary<string, object?> Variables { get; } = new();
+    
 
     public TetlVisitor()
     {
@@ -82,7 +83,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
         {
             values.Add(Visit(value));
         }
-
+        
         return values;
     }
     #endregion
@@ -446,7 +447,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
 
     #endregion
 
-
+    #region While
     public override object? VisitWhileBlock(TetlParser.WhileBlockContext context)
     {
         Func<object?, bool> condition = context.WHILE().GetText() == "while" ? IsTrue : IsFalse;
@@ -465,7 +466,9 @@ public class TetlVisitor : TetlBaseVisitor<object?>
 
         return null;
     }
+    #endregion
 
+    #region Conditions
     public override object? VisitIfBlock(TetlParser.IfBlockContext context)
     {
         string conditionText = context.IF().GetText();
@@ -480,6 +483,55 @@ public class TetlVisitor : TetlBaseVisitor<object?>
         }
 
         return null;
+    }
+    #endregion
+
+    public override object? VisitNotExpression(TetlParser.NotExpressionContext context)
+    {
+        object? value = Visit(context.nExpression());
+        return !(value as bool?);
+    }
+
+    public override object? VisitBooleanExpression(TetlParser.BooleanExpressionContext context)
+    {
+        var left = Visit(context.expression(0));
+        var right = Visit(context.expression(1));
+        var op = context.boolOp().GetText();
+
+        return op switch
+        {
+            "&&" => AndOperator(left, right),
+            "||" => OrOperator(left, right),
+            _ => throw new NotImplementedException()
+        };
+    }
+
+    private object? AndOperator(object? left, object? right)
+    {
+        if (left as bool? == true)
+        {
+            if (right as bool? == true)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
+    private object? OrOperator(object? left, object? right)
+    {
+        if (left as bool? == true)
+        {
+            return true;
+        }
+
+        if (right as bool? == true)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public override object? VisitComparisonExpression(TetlParser.ComparisonExpressionContext context)

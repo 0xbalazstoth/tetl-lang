@@ -1,9 +1,5 @@
->*tomb = [1, 2, 3, 4, 5, 7+7];
-tomb2 = ["alma", "barack", "kecske"];
-i = 0;
-ertek = 0;
-while (i < 5)
-{
-    ertek = ertek + GetElementAt(tomb, i);
-    i = i + 1;
-}*<
+>> Array tests
+
+array = [1, 2, 3, 4, 5, 7+7];
+array2 = ["orange", "apple"];
+

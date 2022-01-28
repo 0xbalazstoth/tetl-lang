@@ -15,20 +15,21 @@ block: '{' line* '}';
 
 WHILE: 'while' | 'until';
 
-IF: 'if' | 'eztNezdManMegHe';
-ELSE: 'else' | 'különben';
+IF: 'if';
+ELSE: 'else';
 
 assignment: IDENTIFIER '=' expression;
 
 functionCall: IDENTIFIER '(' (expression (',' expression)*)? ')';
 arrayInit: '[' expression (',' expression)* ']';
+nExpression: '!' expression;
 
 expression
 	: constant								#constantExpression
 	| IDENTIFIER							#identifierExpression
 	| functionCall							#functionCallExpression
 	| '(' expression ')'					#parenthesizedExpression
-	| '!' expression						#notExpression
+	| nExpression				            #notExpression
 	| arrayInit                             #arrayExpression
 	| expression multOp expression			#multiplicativeExpression
 	| expression addOp expression			#additiveExpression
@@ -50,6 +51,10 @@ FLOAT: [0-9]+ '.' [0-9]+;
 STRING: ('"' ~'"'* '"') | ('\'' ~'\''* '\'');
 BOOL: 'true' | 'false';
 NULL: 'null';
+FOR: 'for';
+IN: 'in';
+FOREACH: 'foreach';
+DO: 'do';
 
 COMMENT: '>*' .*? '*<' -> skip;
 

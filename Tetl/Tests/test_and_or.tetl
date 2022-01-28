@@ -1,0 +1,15 @@
+>> And, or tests
+
+a = 5;
+if (5 % 2 == 0 || a != 5) >> false
+{
+    OutNewLine("False :: if block");
+}
+else if (a == 5 && !a % 2 == 0) >> true
+{
+    OutNewLine("True :: else if block");
+}
+else >> false
+{
+    OutNewLine("False :: else block");
+}

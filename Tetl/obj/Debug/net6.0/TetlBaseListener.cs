@@ -316,6 +316,19 @@ public partial class TetlBaseListener : ITetlListener {
 	public virtual void ExitArrayInit([NotNull] TetlParser.ArrayInitContext context) { }
 
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="TetlParser.nExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterNExpression([NotNull] TetlParser.NExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="TetlParser.nExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitNExpression([NotNull] TetlParser.NExpressionContext context) { }
+
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="TetlParser.expression"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
