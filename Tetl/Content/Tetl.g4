@@ -42,7 +42,7 @@ addOp: '+' | '-';
 compareOp: '==' | '!=' | '>' | '<' | '>=' | '<=';
 boolOp: BOOL_OPERATOR;
 
-BOOL_OPERATOR: '&&' | '||';
+BOOL_OPERATOR: '&&' | 'and' | '||' | 'or';
 
 constant: INTEGER | FLOAT | STRING | BOOL | NULL;
 
