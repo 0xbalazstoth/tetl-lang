@@ -1,0 +1,42 @@
+>> Condition tests
+
+>> If condition
+t1 = false; >> false
+if ("apple" != "orange")
+{
+    t1 = true;
+}
+
+OutNewLine(t1);
+OutNewLine("");
+
+>> If/else condition
+i = 5;
+t2 = i % 3;
+if (t2 == 0)
+{
+    OutNewLine("even");
+}
+else
+{
+    OutNewLine("odd");
+}
+
+OutNewLine("");
+
+>> If/else/else if condition
+t3 = 5.4;
+if (t3 == 5.4)
+{
+    OutNewLine("5.4");
+}
+else if (t3 == 5.5)
+{
+    OutNewLine("5.5");
+}
+else
+{
+    OutNewLine("Something else...");
+}
+
+OutNewLine("");

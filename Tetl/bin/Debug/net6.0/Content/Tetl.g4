@@ -6,13 +6,19 @@ line: statement | ifBlock | whileBlock;
 
 statement: (assignment|functionCall) ';';
 
-ifBlock: 'if' expression block ('else' elseIfBlock);
-
+ifBlock: IF '(' expression ')' block (ELSE elseIfBlock)?;
 elseIfBlock: block | ifBlock;
 
-whileBlock: WHILE expression block ('else' elseIfBlock);
+whileBlock: WHILE '(' expression ')' block;
+
+block: '{' line* '}';
 
 WHILE: 'while' | 'until';
+
+array: '[' ( expression ( ',' expression )* )? ']';
+
+IF: 'if';
+ELSE: 'else';
 
 assignment: IDENTIFIER '=' expression;
 
@@ -35,7 +41,7 @@ addOp: '+' | '-';
 compareOp: '==' | '!=' | '>' | '<' | '>=' | '<=';
 boolOp: BOOL_OPERATOR;
 
-BOOL_OPERATOR: 'and' | 'or' | 'xor';
+BOOL_OPERATOR: '&&' | '||';
 
 constant: INTEGER | FLOAT | STRING | BOOL | NULL;
 
@@ -44,8 +50,6 @@ FLOAT: [0-9]+ '.' [0-9]+;
 STRING: ('"' ~'"'* '"') | ('\'' ~'\''* '\'');
 BOOL: 'true' | 'false';
 NULL: 'null';
-
-block: '{' line* '}';
 
 COMMENT: '>*' .*? '*<' -> skip;
 

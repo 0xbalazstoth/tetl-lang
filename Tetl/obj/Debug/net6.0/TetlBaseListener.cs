@@ -249,6 +249,32 @@ public partial class TetlBaseListener : ITetlListener {
 	public virtual void ExitWhileBlock([NotNull] TetlParser.WhileBlockContext context) { }
 
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="TetlParser.block"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterBlock([NotNull] TetlParser.BlockContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="TetlParser.block"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitBlock([NotNull] TetlParser.BlockContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="TetlParser.array"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterArray([NotNull] TetlParser.ArrayContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="TetlParser.array"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitArray([NotNull] TetlParser.ArrayContext context) { }
+
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="TetlParser.assignment"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -351,19 +377,6 @@ public partial class TetlBaseListener : ITetlListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitConstant([NotNull] TetlParser.ConstantContext context) { }
-
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="TetlParser.block"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterBlock([NotNull] TetlParser.BlockContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="TetlParser.block"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitBlock([NotNull] TetlParser.BlockContext context) { }
 
 	/// <inheritdoc/>
 	/// <remarks>The default implementation does nothing.</remarks>

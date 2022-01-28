@@ -215,6 +215,28 @@ public interface ITetlListener : IParseTreeListener {
 	void ExitWhileBlock([NotNull] TetlParser.WhileBlockContext context);
 
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="TetlParser.block"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterBlock([NotNull] TetlParser.BlockContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="TetlParser.block"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitBlock([NotNull] TetlParser.BlockContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="TetlParser.array"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterArray([NotNull] TetlParser.ArrayContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="TetlParser.array"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitArray([NotNull] TetlParser.ArrayContext context);
+
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="TetlParser.assignment"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -301,16 +323,5 @@ public interface ITetlListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitConstant([NotNull] TetlParser.ConstantContext context);
-
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="TetlParser.block"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterBlock([NotNull] TetlParser.BlockContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="TetlParser.block"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitBlock([NotNull] TetlParser.BlockContext context);
 }
 } // namespace Tetl.Content

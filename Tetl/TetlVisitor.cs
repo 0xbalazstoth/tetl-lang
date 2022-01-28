@@ -381,6 +381,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
     #endregion
 
     #region Modulus
+
     private object? Modulus(object? left, object? right)
     {
         if (left is int l && right is int r)
@@ -432,8 +433,9 @@ public class TetlVisitor : TetlBaseVisitor<object?>
             };
         }
     }
+
     #endregion
-    
+
 
     public override object? VisitWhileBlock(TetlParser.WhileBlockContext context)
     {
@@ -449,6 +451,22 @@ public class TetlVisitor : TetlBaseVisitor<object?>
         else
         {
             Visit(context.block());
+        }
+
+        return null;
+    }
+
+    public override object? VisitIfBlock(TetlParser.IfBlockContext context)
+    {
+        string conditionText = context.IF().GetText();
+        Func<object?, bool> condition = conditionText == "if" ? IsTrue : IsFalse;
+        if (condition(Visit(context.expression())))
+        {
+            Visit(context.block());
+        }
+        else
+        {
+            Visit(context.elseIfBlock());
         }
 
         return null;

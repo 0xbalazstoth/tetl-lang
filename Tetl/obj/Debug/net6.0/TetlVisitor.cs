@@ -147,6 +147,20 @@ public interface ITetlVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitWhileBlock([NotNull] TetlParser.WhileBlockContext context);
 
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="TetlParser.block"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitBlock([NotNull] TetlParser.BlockContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="TetlParser.array"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitArray([NotNull] TetlParser.ArrayContext context);
+
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="TetlParser.assignment"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -201,12 +215,5 @@ public interface ITetlVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitConstant([NotNull] TetlParser.ConstantContext context);
-
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="TetlParser.block"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitBlock([NotNull] TetlParser.BlockContext context);
 }
 } // namespace Tetl.Content

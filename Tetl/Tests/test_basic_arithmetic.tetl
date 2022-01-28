@@ -33,6 +33,6 @@ OutNewLine("");
 >> Subtract :: -
 t14 = 5 - 5; >> 0
 t15 = 6.4 - 10.99; >> -4,5899997
-t16 = "asd" - 54; >> TetlInvalidSubtractException
+>> t16 = "asd" - 54; >> TetlInvalidSubtractException
 OutNewLine(t14 + " " + t15);
 OutNewLine("");
