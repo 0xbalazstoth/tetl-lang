@@ -500,8 +500,8 @@ public class TetlVisitor : TetlBaseVisitor<object?>
 
         return op switch
         {
-            "&&" => AndOperator(left, right),
             "and" => AndOperator(left, right),
+            "&&" => AndOperator(left, right),
             "||" => OrOperator(left, right),
             "or" => OrOperator(left, right),
             _ => throw new NotImplementedException()
