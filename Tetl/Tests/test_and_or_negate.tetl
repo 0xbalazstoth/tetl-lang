@@ -1,4 +1,4 @@
->> And, or tests
+>> And, or, negate tests
 
 a = 5;
 if (5 % 2 == 0 or a != 5) >> false

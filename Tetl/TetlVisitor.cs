@@ -486,12 +486,15 @@ public class TetlVisitor : TetlBaseVisitor<object?>
     }
     #endregion
 
+    #region Negate
     public override object? VisitNotExpression(TetlParser.NotExpressionContext context)
     {
         object? value = Visit(context.nExpression());
         return !(value as bool?);
     }
+    #endregion
 
+    #region And, or
     public override object? VisitBooleanExpression(TetlParser.BooleanExpressionContext context)
     {
         var left = Visit(context.expression(0));
@@ -507,6 +510,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
             _ => throw new NotImplementedException()
         };
     }
+    
 
     private object? AndOperator(object? left, object? right)
     {
@@ -535,6 +539,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
 
         return false;
     }
+    #endregion
 
     public override object? VisitComparisonExpression(TetlParser.ComparisonExpressionContext context)
     {
