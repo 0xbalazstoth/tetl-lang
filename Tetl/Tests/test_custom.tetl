@@ -1,33 +1,4 @@
->> Sorozatszámítás tétele
-i = 0;
-ertek = 0;
-while (i < 18)
+if (true == false)
 {
-    ertek = ertek + i;
-    i = i + 1;
+    OutNewLine("asd");
 }
-
-OutNewLine(ertek);
-OutNewLine("---");
-
->> Eldöntés tétele
-i = 0;
-while (i <= 0 && !i % 2 == 0)
-{
-    i = i + 1;
-}
-van = i <= 0;
-
-OutNewLine(van);
-OutNewLine("---");
-
->> Módosított eldöntés tétele
-i = 0;
-while (i <= 5 && i % 2 == 0)
-{
-    i = i + 1;
-}
-van = i > 5;
-
-OutNewLine(van);
-OutNewLine("---");

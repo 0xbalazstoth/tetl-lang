@@ -1,0 +1,4 @@
+>> For loop tests
+
+array = [1, 2, 3, 4, 5];
+a = array[0];

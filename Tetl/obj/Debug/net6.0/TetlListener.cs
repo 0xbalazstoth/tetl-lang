@@ -136,6 +136,19 @@ public interface ITetlListener : IParseTreeListener {
 	void ExitComparisonExpression([NotNull] TetlParser.ComparisonExpressionContext context);
 
 	/// <summary>
+	/// Enter a parse tree produced by the <c>indexExpression</c>
+	/// labeled alternative in <see cref="TetlParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterIndexExpression([NotNull] TetlParser.IndexExpressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>indexExpression</c>
+	/// labeled alternative in <see cref="TetlParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitIndexExpression([NotNull] TetlParser.IndexExpressionContext context);
+
+	/// <summary>
 	/// Enter a parse tree produced by the <c>multiplicativeExpression</c>
 	/// labeled alternative in <see cref="TetlParser.expression"/>.
 	/// </summary>
@@ -228,6 +241,17 @@ public interface ITetlListener : IParseTreeListener {
 	void ExitWhileBlock([NotNull] TetlParser.WhileBlockContext context);
 
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="TetlParser.forBlock"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterForBlock([NotNull] TetlParser.ForBlockContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="TetlParser.forBlock"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitForBlock([NotNull] TetlParser.ForBlockContext context);
+
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="TetlParser.block"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -270,6 +294,17 @@ public interface ITetlListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitArrayInit([NotNull] TetlParser.ArrayInitContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="TetlParser.index"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterIndex([NotNull] TetlParser.IndexContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="TetlParser.index"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitIndex([NotNull] TetlParser.IndexContext context);
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="TetlParser.nExpression"/>.

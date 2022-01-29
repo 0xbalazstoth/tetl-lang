@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using Antlr4.Runtime.Tree;
 using Tetl;
 using Tetl.Content;
@@ -11,7 +13,6 @@ namespace Tetl;
 public class TetlVisitor : TetlBaseVisitor<object?>
 {
     private Dictionary<string, object?> Variables { get; } = new();
-    
 
     public TetlVisitor()
     {
@@ -83,10 +84,27 @@ public class TetlVisitor : TetlBaseVisitor<object?>
         {
             values.Add(Visit(value));
         }
-        
+
         return values;
     }
     #endregion
+
+    public override object? VisitIndex(TetlParser.IndexContext context)
+    {
+        var varName = context.IDENTIFIER().GetText();
+        int index = Convert.ToInt32(context.INTEGER().GetText());
+        
+        if (Variables[varName] != null)
+        {
+            if (Variables.ContainsKey(varName))
+            {
+                var array = Variables.GetValueOrDefault(varName);
+                ;
+            }
+        }
+
+        return null;
+    }
 
     public override object? VisitIdentifierExpression(TetlParser.IdentifierExpressionContext context)
     {
@@ -447,10 +465,34 @@ public class TetlVisitor : TetlBaseVisitor<object?>
 
     #endregion
 
-    #region While
+    #region While loop
     public override object? VisitWhileBlock(TetlParser.WhileBlockContext context)
     {
         Func<object?, bool> condition = context.WHILE().GetText() == "while" ? IsTrue : IsFalse;
+
+        if (condition(Visit(context.expression())))
+        {
+            do
+            {
+                Visit(context.block());
+            } while (condition(Visit(context.expression())));
+        }
+        else
+        {
+            Visit(context.block());
+        }
+
+        return null;
+    }
+    #endregion
+
+    #region For loop
+    public override object? VisitForBlock(TetlParser.ForBlockContext context)
+    {
+        Func<object?, bool> condition = context.FOR().GetText() == "for" ? IsTrue : IsFalse;
+        var varName = context.assignment().IDENTIFIER().GetText();
+        var value = Visit(context.assignment().expression());
+        Variables[varName] = value;
 
         if (condition(Visit(context.expression())))
         {

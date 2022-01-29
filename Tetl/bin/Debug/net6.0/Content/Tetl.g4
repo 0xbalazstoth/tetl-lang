@@ -2,7 +2,7 @@ grammar Tetl;
 
 program: line* EOF;
 
-line: statement | ifBlock | whileBlock;
+line: statement | ifBlock | whileBlock | forBlock;
 
 statement: (assignment|functionCall) ';';
 
@@ -10,18 +10,15 @@ ifBlock: IF '(' expression ')' block (ELSE elseIfBlock)?;
 elseIfBlock: block | ifBlock;
 
 whileBlock: WHILE '(' expression ')' block;
+forBlock: FOR '(' assignment ';' expression ')' block;
 
 block: '{' line* '}';
-
-WHILE: 'while' | 'until';
-
-IF: 'if';
-ELSE: 'else';
 
 assignment: IDENTIFIER '=' expression;
 
 functionCall: IDENTIFIER '(' (expression (',' expression)*)? ')';
 arrayInit: '[' expression (',' expression)* ']';
+index: IDENTIFIER '[' INTEGER ']';
 nExpression: '!' expression;
 
 expression
@@ -31,6 +28,7 @@ expression
 	| '(' expression ')'					#parenthesizedExpression
 	| nExpression				            #notExpression
 	| arrayInit                             #arrayExpression
+	| index                                 #indexExpression
 	| expression multOp expression			#multiplicativeExpression
 	| expression addOp expression			#additiveExpression
 	| expression compareOp expression		#comparisonExpression
@@ -55,9 +53,10 @@ FOR: 'for';
 IN: 'in';
 FOREACH: 'foreach';
 DO: 'do';
-
+WHILE: 'while' | 'until';
+IF: 'if';
+ELSE: 'else';
 COMMENT: '>*' .*? '*<' -> skip;
-
 LINE_COMMENT: '>>' ~[\r\n]* -> skip;
 LINE_BREAK: '\n';
 WS: [ \t\r\n]+ -> skip;

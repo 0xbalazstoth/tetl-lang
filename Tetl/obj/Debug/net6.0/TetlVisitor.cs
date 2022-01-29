@@ -97,6 +97,14 @@ public interface ITetlVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitComparisonExpression([NotNull] TetlParser.ComparisonExpressionContext context);
 
 	/// <summary>
+	/// Visit a parse tree produced by the <c>indexExpression</c>
+	/// labeled alternative in <see cref="TetlParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitIndexExpression([NotNull] TetlParser.IndexExpressionContext context);
+
+	/// <summary>
 	/// Visit a parse tree produced by the <c>multiplicativeExpression</c>
 	/// labeled alternative in <see cref="TetlParser.expression"/>.
 	/// </summary>
@@ -155,6 +163,13 @@ public interface ITetlVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitWhileBlock([NotNull] TetlParser.WhileBlockContext context);
 
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="TetlParser.forBlock"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitForBlock([NotNull] TetlParser.ForBlockContext context);
+
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="TetlParser.block"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -181,6 +196,13 @@ public interface ITetlVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitArrayInit([NotNull] TetlParser.ArrayInitContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="TetlParser.index"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitIndex([NotNull] TetlParser.IndexContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="TetlParser.nExpression"/>.

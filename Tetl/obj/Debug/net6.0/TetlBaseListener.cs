@@ -156,6 +156,21 @@ public partial class TetlBaseListener : ITetlListener {
 	public virtual void ExitComparisonExpression([NotNull] TetlParser.ComparisonExpressionContext context) { }
 
 	/// <summary>
+	/// Enter a parse tree produced by the <c>indexExpression</c>
+	/// labeled alternative in <see cref="TetlParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterIndexExpression([NotNull] TetlParser.IndexExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>indexExpression</c>
+	/// labeled alternative in <see cref="TetlParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitIndexExpression([NotNull] TetlParser.IndexExpressionContext context) { }
+
+	/// <summary>
 	/// Enter a parse tree produced by the <c>multiplicativeExpression</c>
 	/// labeled alternative in <see cref="TetlParser.expression"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -264,6 +279,19 @@ public partial class TetlBaseListener : ITetlListener {
 	public virtual void ExitWhileBlock([NotNull] TetlParser.WhileBlockContext context) { }
 
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="TetlParser.forBlock"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterForBlock([NotNull] TetlParser.ForBlockContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="TetlParser.forBlock"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitForBlock([NotNull] TetlParser.ForBlockContext context) { }
+
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="TetlParser.block"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -314,6 +342,19 @@ public partial class TetlBaseListener : ITetlListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitArrayInit([NotNull] TetlParser.ArrayInitContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="TetlParser.index"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterIndex([NotNull] TetlParser.IndexContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="TetlParser.index"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitIndex([NotNull] TetlParser.IndexContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="TetlParser.nExpression"/>.
