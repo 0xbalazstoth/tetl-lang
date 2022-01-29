@@ -6,6 +6,8 @@ indexAt = 3;
 OutNewLine(array[5]);
 OutNewLine(array2[1]);
 OutNewLine(array[indexAt]);
+OutNewLine(array.At(2));
+OutNewLine(array.At(indexAt));
 OutNewLine("");
 
 i = 0;

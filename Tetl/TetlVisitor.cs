@@ -183,130 +183,16 @@ public class TetlVisitor : TetlBaseVisitor<object?>
         var right = Visit(context.expression(1));
 
         var op = context.addOp().GetText();
+
+        var additiveExpressions = new AdditiveExpressions();
+        
         return op switch
         {
-            "+" => Add(left, right),
-            "-" => Subtract(left, right),
+            "+" => additiveExpressions.Add(left, right),
+            "-" => additiveExpressions.Subtract(left, right),
             _ => throw new NotImplementedException("Invalid operation!")
         };
     }
-
-    #region Addition
-
-    private object? Add(object? left, object? right)
-    {
-        if (left is int l && right is int r)
-        {
-            return l + r;
-        }
-
-        if (left is float lf && right is float rf)
-        {
-            return lf + rf;
-        }
-
-        if (left is int lInt && right is float rFloat)
-        {
-            return lInt + rFloat;
-        }
-
-        if (left is float lFloat && right is int rInt)
-        {
-            return lFloat + rInt;
-        }
-
-        if (left is string || right is string)
-        {
-            return $"{left}{right}";
-        }
-
-        if (left?.GetType() == null && right?.GetType() == null)
-        {
-            throw new TetlInvalidAdditionException()
-            {
-                ErrorMessage = "Both values are null!",
-                Left = $"{nameof(left)}: {left}",
-                Right = $"{nameof(right)}: {right}"
-            };
-        }
-        else if ((left?.GetType() == null && right?.GetType() != null) ||
-                 (left?.GetType() != null && right?.GetType() == null))
-        {
-            throw new TetlInvalidAdditionException()
-            {
-                ErrorMessage = "Cannot add null value!",
-                Left = $"{nameof(left)}: {left}",
-                Right = $"{nameof(right)}: {right}"
-            };
-        }
-        else
-        {
-            throw new TetlInvalidAdditionException()
-            {
-                ErrorMessage = $"Cannot add values of types {left?.GetType()} and {right?.GetType()}",
-                Left = $"{nameof(left)}: {left}",
-                Right = $"{nameof(right)}: {right}"
-            };
-        }
-    }
-
-    #endregion
-
-    #region Subtract
-
-    private object? Subtract(object? left, object? right)
-    {
-        if (left is int l && right is int r)
-        {
-            return l - r;
-        }
-
-        if (left is float lf && right is float rf)
-        {
-            return lf - rf;
-        }
-
-        if (left is int lInt && right is float rFloat)
-        {
-            return lInt - rFloat;
-        }
-
-        if (left is float lFloat && right is int rInt)
-        {
-            return lFloat - rInt;
-        }
-
-        if (left?.GetType() == null && right?.GetType() == null)
-        {
-            throw new TetlInvalidSubtractException()
-            {
-                ErrorMessage = "Both values are null!",
-                Left = $"{nameof(left)}: {left}",
-                Right = $"{nameof(right)}: {right}"
-            };
-        }
-        else if ((left?.GetType() == null && right?.GetType() != null) ||
-                 (left?.GetType() != null && right?.GetType() == null))
-        {
-            throw new TetlInvalidSubtractException()
-            {
-                ErrorMessage = "Cannot subtract null value!",
-                Left = $"{nameof(left)}: {left}",
-                Right = $"{nameof(right)}: {right}"
-            };
-        }
-        else
-        {
-            throw new TetlInvalidSubtractException()
-            {
-                ErrorMessage = $"Cannot subtract values of types {left?.GetType()} and {right?.GetType()}",
-                Left = $"{nameof(left)}: {left}",
-                Right = $"{nameof(right)}: {right}"
-            };
-        }
-    }
-
-    #endregion
 
     public override object? VisitMultiplicativeExpression(TetlParser.MultiplicativeExpressionContext context)
     {
@@ -314,182 +200,17 @@ public class TetlVisitor : TetlBaseVisitor<object?>
         var right = Visit(context.expression(1));
 
         var op = context.multOp().GetText();
+
+        var multiplicativeExpressions = new MultiplicativeExpressions();
+        
         return op switch
         {
-            "*" => Multiplication(left, right),
-            "/" => Division(left, right),
-            "%" => Modulus(left, right),
+            "*" => multiplicativeExpressions.Multiplication(left, right),
+            "/" => multiplicativeExpressions.Division(left, right),
+            "%" => multiplicativeExpressions.Modulus(left, right),
             _ => throw new NotImplementedException("Invalid operation!")
         };
     }
-
-    #region Multiplication
-
-    private object? Multiplication(object? left, object? right)
-    {
-        if (left is int l && right is int r)
-        {
-            return l * r;
-        }
-
-        if (left is float lf && right is float rf)
-        {
-            return lf * rf;
-        }
-
-        if (left is int lInt && right is float rFloat)
-        {
-            return lInt * rFloat;
-        }
-
-        if (left is float lFloat && right is int rInt)
-        {
-            return lFloat * rInt;
-        }
-
-        if (left?.GetType() == null && right?.GetType() == null)
-        {
-            throw new TetlInvalidMultiplicationException()
-            {
-                ErrorMessage = "Both values are null!",
-                Left = $"{nameof(left)}: {left}",
-                Right = $"{nameof(right)}: {right}"
-            };
-        }
-        else if ((left?.GetType() == null && right?.GetType() != null) ||
-                 (left?.GetType() != null && right?.GetType() == null))
-        {
-            throw new TetlInvalidMultiplicationException()
-            {
-                ErrorMessage = "Cannot multiplicate null value!",
-                Left = $"{nameof(left)}: {left}",
-                Right = $"{nameof(right)}: {right}"
-            };
-        }
-        else
-        {
-            throw new TetlInvalidMultiplicationException()
-            {
-                ErrorMessage = $"Cannot multiplicate values of types {left?.GetType()} and {right?.GetType()}",
-                Left = $"{nameof(left)}: {left}",
-                Right = $"{nameof(right)}: {right}"
-            };
-        }
-    }
-
-    #endregion
-
-    #region Division
-
-    private object? Division(object? left, object? right)
-    {
-        if (left is int l && right is int r)
-        {
-            return (float) l / (float) r;
-        }
-
-        if (left is float lf && right is float rf)
-        {
-            return (float) lf / (float) rf;
-        }
-
-        if (left is int lInt && right is float rFloat)
-        {
-            return (int) lInt / (float) rFloat;
-        }
-
-        if (left is float lFloat && right is int rInt)
-        {
-            return (float) lFloat / (int) rInt;
-        }
-
-        if (left?.GetType() == null && right?.GetType() == null)
-        {
-            throw new TetlInvalidDivisionException()
-            {
-                ErrorMessage = "Both values are null!",
-                Left = $"{nameof(left)}: {left}",
-                Right = $"{nameof(right)}: {right}"
-            };
-        }
-        else if ((left?.GetType() == null && right?.GetType() != null) ||
-                 (left?.GetType() != null && right?.GetType() == null))
-        {
-            throw new TetlInvalidDivisionException()
-            {
-                ErrorMessage = "Cannot divide null value!",
-                Left = $"{nameof(left)}: {left}",
-                Right = $"{nameof(right)}: {right}"
-            };
-        }
-        else
-        {
-            throw new TetlInvalidDivisionException()
-            {
-                ErrorMessage = $"Cannot divide values of types {left?.GetType()} and {right?.GetType()}",
-                Left = $"{nameof(left)}: {left}",
-                Right = $"{nameof(right)}: {right}"
-            };
-        }
-    }
-
-    #endregion
-
-    #region Modulus
-
-    private object? Modulus(object? left, object? right)
-    {
-        if (left is int l && right is int r)
-        {
-            return (float) l % (float) r;
-        }
-
-        if (left is float lf && right is float rf)
-        {
-            return (float) lf % (float) rf;
-        }
-
-        if (left is int lInt && right is float rFloat)
-        {
-            return (int) lInt % (float) rFloat;
-        }
-
-        if (left is float lFloat && right is int rInt)
-        {
-            return (float) lFloat % (int) rInt;
-        }
-
-        if (left?.GetType() == null && right?.GetType() == null)
-        {
-            throw new TetlInvalidModulusException()
-            {
-                ErrorMessage = "Both values are null!",
-                Left = $"{nameof(left)}: {left}",
-                Right = $"{nameof(right)}: {right}"
-            };
-        }
-        else if ((left?.GetType() == null && right?.GetType() != null) ||
-                 (left?.GetType() != null && right?.GetType() == null))
-        {
-            throw new TetlInvalidModulusException()
-            {
-                ErrorMessage = "Cannot divide null value!",
-                Left = $"{nameof(left)}: {left}",
-                Right = $"{nameof(right)}: {right}"
-            };
-        }
-        else
-        {
-            throw new TetlInvalidModulusException()
-            {
-                ErrorMessage = $"Cannot divide values of types {left?.GetType()} and {right?.GetType()}",
-                Left = $"{nameof(left)}: {left}",
-                Right = $"{nameof(right)}: {right}"
-            };
-        }
-    }
-
-    #endregion
 
     #region While loop
     public override object? VisitWhileBlock(TetlParser.WhileBlockContext context)
@@ -562,50 +283,23 @@ public class TetlVisitor : TetlBaseVisitor<object?>
     }
     #endregion
 
-    #region And, or
+    #region Boolean and, or
     public override object? VisitBooleanExpression(TetlParser.BooleanExpressionContext context)
     {
         var left = Visit(context.expression(0));
         var right = Visit(context.expression(1));
         var op = context.boolOp().GetText();
 
+        var booleanExpressions = new BooleanExpressions();
+        
         return op switch
         {
-            "and" => AndOperator(left, right),
-            "&&" => AndOperator(left, right),
-            "||" => OrOperator(left, right),
-            "or" => OrOperator(left, right),
+            "and" => booleanExpressions.AndOperator(left, right),
+            "&&" => booleanExpressions.AndOperator(left, right),
+            "||" => booleanExpressions.OrOperator(left, right),
+            "or" => booleanExpressions.OrOperator(left, right),
             _ => throw new NotImplementedException()
         };
-    }
-    
-
-    private object? AndOperator(object? left, object? right)
-    {
-        if (left as bool? == true)
-        {
-            if (right as bool? == true)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-    
-    private object? OrOperator(object? left, object? right)
-    {
-        if (left as bool? == true)
-        {
-            return true;
-        }
-
-        if (right as bool? == true)
-        {
-            return true;
-        }
-
-        return false;
     }
     #endregion
 
@@ -616,215 +310,17 @@ public class TetlVisitor : TetlBaseVisitor<object?>
 
         var op = context.compareOp().GetText();
 
+        var comparisonExpressions = new ComparisonExpressions();
+
         return op switch
         {
-            "==" => IsEquals(left, right),
-            "!=" => NotEquals(left, right),
-            ">" => GreaterThan(left, right),
-            "<" => LessThan(left, right),
-            ">=" => GreaterThanOrEqual(left, right),
-            "<=" => LessThenOrEqual(left, right),
+            "==" => comparisonExpressions.IsEquals(left, right),
+            "!=" => comparisonExpressions.NotEquals(left, right),
+            ">" => comparisonExpressions.GreaterThan(left, right),
+            "<" => comparisonExpressions.LessThan(left, right),
+            ">=" => comparisonExpressions.GreaterThanOrEqual(left, right),
+            "<=" => comparisonExpressions.LessThenOrEqual(left, right),
             _ => throw new NotImplementedException()
-        };
-    }
-
-    private bool IsEquals(object? left, object? right)
-    {
-        if (left is int l && right is int r)
-        {
-            return l == r;
-        }
-
-        if (left is float lf && right is float rf)
-        {
-            return lf == rf;
-        }
-
-        if (left is int lInt && right is float rFloat)
-        {
-            return lInt == rFloat;
-        }
-
-        if (left is float lFloat && right is int rInt)
-        {
-            return lFloat == rInt;
-        }
-
-        if (left is string lString && right is string rString)
-        {
-            return lString == rString;
-        }
-
-        if (left is bool lBool && right is bool rBool)
-        {
-            return lBool == rBool;
-        }
-
-        throw new TetlCannotCompareValuesException()
-        {
-            ErrorMessage = $"Cannot compare values of {left?.GetType()} and {right?.GetType()}!",
-            Left = $"{nameof(left)}: {left}",
-            Right = $"{nameof(right)}: {right}"
-        };
-    }
-
-    private bool NotEquals(object? left, object? right)
-    {
-        if (left is int l && right is int r)
-        {
-            return l != r;
-        }
-
-        if (left is float lf && right is float rf)
-        {
-            return lf != rf;
-        }
-
-        if (left is int lInt && right is float rFloat)
-        {
-            return lInt != rFloat;
-        }
-
-        if (left is float lFloat && right is int rInt)
-        {
-            return lFloat != rInt;
-        }
-
-        if (left is string lString && right is string rString)
-        {
-            return lString != rString;
-        }
-
-        if (left is bool lBool && right is bool rBool)
-        {
-            return lBool != rBool;
-        }
-
-        throw new TetlCannotCompareValuesException()
-        {
-            ErrorMessage = $"Cannot compare values of {left?.GetType()} and {right?.GetType()}!",
-            Left = $"{nameof(left)}: {left}",
-            Right = $"{nameof(right)}: {right}"
-        };
-    }
-
-    private bool LessThan(object? left, object? right)
-    {
-        if (left is int l && right is int r)
-        {
-            return l < r;
-        }
-
-        if (left is float lf && right is float rf)
-        {
-            return lf < rf;
-        }
-
-        if (left is int lInt && right is float rFloat)
-        {
-            return lInt < rFloat;
-        }
-
-        if (left is float lFloat && right is int rInt)
-        {
-            return lFloat < rInt;
-        }
-
-        throw new TetlCannotCompareValuesException()
-        {
-            ErrorMessage = $"Cannot compare values of {left?.GetType()} and {right?.GetType()}!",
-            Left = $"{nameof(left)}: {left}",
-            Right = $"{nameof(right)}: {right}"
-        };
-    }
-
-    private bool GreaterThan(object? left, object? right)
-    {
-        if (left is int l && right is int r)
-        {
-            return l > r;
-        }
-
-        if (left is float lf && right is float rf)
-        {
-            return lf > rf;
-        }
-
-        if (left is int lInt && right is float rFloat)
-        {
-            return lInt > rFloat;
-        }
-
-        if (left is float lFloat && right is int rInt)
-        {
-            return lFloat > rInt;
-        }
-
-        throw new TetlCannotCompareValuesException()
-        {
-            ErrorMessage = $"Cannot compare values of {left?.GetType()} and {right?.GetType()}!",
-            Left = $"{nameof(left)}: {left}",
-            Right = $"{nameof(right)}: {right}"
-        };
-    }
-
-    private bool GreaterThanOrEqual(object? left, object? right)
-    {
-        if (left is int l && right is int r)
-        {
-            return l >= r;
-        }
-
-        if (left is float lf && right is float rf)
-        {
-            return lf >= rf;
-        }
-
-        if (left is int lInt && right is float rFloat)
-        {
-            return lInt >= rFloat;
-        }
-
-        if (left is float lFloat && right is int rInt)
-        {
-            return lFloat >= rInt;
-        }
-
-        throw new TetlCannotCompareValuesException()
-        {
-            ErrorMessage = $"Cannot compare values of {left?.GetType()} and {right?.GetType()}!",
-            Left = $"{nameof(left)}: {left}",
-            Right = $"{nameof(right)}: {right}"
-        };
-    }
-
-    private bool LessThenOrEqual(object? left, object? right)
-    {
-        if (left is int l && right is int r)
-        {
-            return l <= r;
-        }
-
-        if (left is float lf && right is float rf)
-        {
-            return lf <= rf;
-        }
-
-        if (left is int lInt && right is float rFloat)
-        {
-            return lInt <= rFloat;
-        }
-
-        if (left is float lFloat && right is int rInt)
-        {
-            return lFloat <= rInt;
-        }
-
-        throw new TetlCannotCompareValuesException()
-        {
-            ErrorMessage = $"Cannot compare values of {left?.GetType()} and {right?.GetType()}!",
-            Left = $"{nameof(left)}: {left}",
-            Right = $"{nameof(right)}: {right}"
         };
     }
 

@@ -18,8 +18,8 @@ assignment: IDENTIFIER '=' expression;
 
 functionCall: IDENTIFIER '(' (expression (',' expression)*)? ')';
 arrayInit: '[' expression (',' expression)* ']';
-indexVariable: varName=IDENTIFIER '[' at=IDENTIFIER ']';
-indexInteger: varName=IDENTIFIER '[' at=INTEGER ']';
+indexVariable: varName=IDENTIFIER '[' at=IDENTIFIER ']' | varName=IDENTIFIER '.At' '(' at=IDENTIFIER ')';
+indexInteger: varName=IDENTIFIER '[' at=INTEGER ']' | varName=IDENTIFIER '.At' '(' at=INTEGER ')';
 nExpression: '!' expression;
 
 expression
