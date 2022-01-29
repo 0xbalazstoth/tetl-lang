@@ -88,6 +88,111 @@ public class TetlVisitor : TetlBaseVisitor<object?>
         return values;
     }
     #endregion
+    
+    #region Variable length
+
+    public override object? VisitVariableLength(TetlParser.VariableLengthContext context)
+    {
+        var varName = context.varName.Text;
+
+        if (Variables[varName] != null)
+        {
+            if (Variables.ContainsKey(varName))
+            {
+                var variable = Variables.GetValueOrDefault(varName);
+
+                if (variable != null)
+                {
+                    if (variable.GetType().IsGenericType && variable is IEnumerable)
+                    {
+                        var elements = variable as List<object?>;
+                        if (elements != null)
+                        {
+                            return elements.Count;
+                        }
+                    }
+                    else if (variable is string)
+                    {
+                        var str = variable as string;
+                        if (str != null)
+                        {
+                            return str.Length;
+                        }
+                    }
+                }
+            }
+        }
+        
+        throw new TetlValueCannotBeNullException()
+        {
+            ErrorMessage = "Value is null!",
+        };
+    }
+
+    public override object? VisitVariableAtLength(TetlParser.VariableAtLengthContext context)
+    {
+        var varName = context.indexInteger().varName.Text;
+        var index = Convert.ToInt32(context.indexInteger().at.Text);
+        
+        if (Variables[varName] != null)
+        {
+            if (Variables.ContainsKey(varName))
+            {
+                var variable = Variables.GetValueOrDefault(varName);
+        
+                if (variable != null)
+                {
+                    if (variable.GetType().IsGenericType && variable is IEnumerable)
+                    {
+                        var elements = variable as List<object?>;
+                        if (elements != null)
+                        {
+                            return elements[index]?.ToString()!.Length;
+                        }
+                    }
+                }
+            }
+        }
+        
+        throw new TetlValueCannotBeNullException()
+        {
+            ErrorMessage = "Value is null!",
+        };
+    }
+
+    public override object? VisitVariableAtIdentifierLength(TetlParser.VariableAtIdentifierLengthContext context)
+    {
+        var varName = context.indexVariable().varName.Text;
+        var indexVariableName = context.indexVariable().at.Text;
+        var indexVariableValue = Convert.ToInt32(Variables.GetValueOrDefault(indexVariableName));
+
+        if (Variables[varName] != null)
+        {
+            if (Variables.ContainsKey(varName))
+            {
+                var variable = Variables.GetValueOrDefault(varName);
+        
+                if (variable != null)
+                {
+                    if (variable.GetType().IsGenericType && variable is IEnumerable)
+                    {
+                        var elements = variable as List<object?>;
+                        if (elements != null)
+                        {
+                            return elements[indexVariableValue]?.ToString()!.Length;
+                        }
+                    }
+                }
+            }
+        }
+        
+        throw new TetlValueCannotBeNullException()
+        {
+            ErrorMessage = "Value is null!",
+        };
+    }
+
+    #endregion
 
     #region Indexing
     public override object? VisitIndexVariable(TetlParser.IndexVariableContext context)
@@ -270,7 +375,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
         {
             Visit(context.elseIfBlock());
         }
-
+        
         return null;
     }
     #endregion

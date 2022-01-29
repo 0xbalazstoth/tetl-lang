@@ -4,7 +4,7 @@ using Antlr4.Runtime;
 using Tetl.Content;
 using Tetl;
 
-var fileName = @"C:\Users\rpgix\RiderProjects\Tetl\Tetl\Tests\test_array.tetl";
+var fileName = @"C:\Users\rpgix\RiderProjects\Tetl\Tetl\Tests\test_variable_length.tetl";
 var fileContents = File.ReadAllText(fileName);
 var inputStream = new AntlrInputStream(fileContents);
 var tetlLexer = new TetlLexer(inputStream);
@@ -76,6 +76,11 @@ catch (TetlInvalidModulusException e)
 {
     ProcessInformation($"[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
     ProcessInformation($"[INFO]: {e.Left}, {e.Right}", ConsoleColor.DarkYellow);
+    ProcessInformation($"[ERROR]: {e.ErrorMessage}", ConsoleColor.DarkRed);
+}
+catch (TetlValueCannotBeNullException e)
+{
+    ProcessInformation($"[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
     ProcessInformation($"[ERROR]: {e.ErrorMessage}", ConsoleColor.DarkRed);
 }
 catch (Exception e)

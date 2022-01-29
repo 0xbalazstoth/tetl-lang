@@ -47,4 +47,8 @@ namespace Tetl
     public class TetlInvalidModulusException : TetlBaseException
     {
     }
+
+    public class TetlValueCannotBeNullException : TetlBaseException
+    {
+    }
 }

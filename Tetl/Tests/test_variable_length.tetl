@@ -1,0 +1,10 @@
+>> Variable length tests
+
+array = ["apple", "banana", "orange"];
+i = 0;
+n = array.Length();
+while (i < n)
+{
+    OutNewLine(array[i].Length());
+    i = i + 1;
+}

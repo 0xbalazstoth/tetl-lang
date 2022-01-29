@@ -32,19 +32,6 @@ using IToken = Antlr4.Runtime.IToken;
 [System.CLSCompliant(false)]
 public interface ITetlListener : IParseTreeListener {
 	/// <summary>
-	/// Enter a parse tree produced by the <c>parenthesizedExpression</c>
-	/// labeled alternative in <see cref="TetlParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterParenthesizedExpression([NotNull] TetlParser.ParenthesizedExpressionContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>parenthesizedExpression</c>
-	/// labeled alternative in <see cref="TetlParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitParenthesizedExpression([NotNull] TetlParser.ParenthesizedExpressionContext context);
-
-	/// <summary>
 	/// Enter a parse tree produced by the <c>constantExpression</c>
 	/// labeled alternative in <see cref="TetlParser.expression"/>.
 	/// </summary>
@@ -123,19 +110,6 @@ public interface ITetlListener : IParseTreeListener {
 	void ExitIdentifierExpression([NotNull] TetlParser.IdentifierExpressionContext context);
 
 	/// <summary>
-	/// Enter a parse tree produced by the <c>functionCallExpression</c>
-	/// labeled alternative in <see cref="TetlParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterFunctionCallExpression([NotNull] TetlParser.FunctionCallExpressionContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>functionCallExpression</c>
-	/// labeled alternative in <see cref="TetlParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitFunctionCallExpression([NotNull] TetlParser.FunctionCallExpressionContext context);
-
-	/// <summary>
 	/// Enter a parse tree produced by the <c>notExpression</c>
 	/// labeled alternative in <see cref="TetlParser.expression"/>.
 	/// </summary>
@@ -186,6 +160,71 @@ public interface ITetlListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitBooleanExpression([NotNull] TetlParser.BooleanExpressionContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by the <c>variableAtIdentifierLengthExpression</c>
+	/// labeled alternative in <see cref="TetlParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterVariableAtIdentifierLengthExpression([NotNull] TetlParser.VariableAtIdentifierLengthExpressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>variableAtIdentifierLengthExpression</c>
+	/// labeled alternative in <see cref="TetlParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitVariableAtIdentifierLengthExpression([NotNull] TetlParser.VariableAtIdentifierLengthExpressionContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by the <c>parenthesizedExpression</c>
+	/// labeled alternative in <see cref="TetlParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterParenthesizedExpression([NotNull] TetlParser.ParenthesizedExpressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>parenthesizedExpression</c>
+	/// labeled alternative in <see cref="TetlParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitParenthesizedExpression([NotNull] TetlParser.ParenthesizedExpressionContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by the <c>functionCallExpression</c>
+	/// labeled alternative in <see cref="TetlParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFunctionCallExpression([NotNull] TetlParser.FunctionCallExpressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>functionCallExpression</c>
+	/// labeled alternative in <see cref="TetlParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFunctionCallExpression([NotNull] TetlParser.FunctionCallExpressionContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by the <c>variableLengthExpression</c>
+	/// labeled alternative in <see cref="TetlParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterVariableLengthExpression([NotNull] TetlParser.VariableLengthExpressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>variableLengthExpression</c>
+	/// labeled alternative in <see cref="TetlParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitVariableLengthExpression([NotNull] TetlParser.VariableLengthExpressionContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by the <c>variableAtLengthExpression</c>
+	/// labeled alternative in <see cref="TetlParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterVariableAtLengthExpression([NotNull] TetlParser.VariableAtLengthExpressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>variableAtLengthExpression</c>
+	/// labeled alternative in <see cref="TetlParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitVariableAtLengthExpression([NotNull] TetlParser.VariableAtLengthExpressionContext context);
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="TetlParser.program"/>.
@@ -329,6 +368,39 @@ public interface ITetlListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitIndexInteger([NotNull] TetlParser.IndexIntegerContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="TetlParser.variableLength"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterVariableLength([NotNull] TetlParser.VariableLengthContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="TetlParser.variableLength"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitVariableLength([NotNull] TetlParser.VariableLengthContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="TetlParser.variableAtLength"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterVariableAtLength([NotNull] TetlParser.VariableAtLengthContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="TetlParser.variableAtLength"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitVariableAtLength([NotNull] TetlParser.VariableAtLengthContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="TetlParser.variableAtIdentifierLength"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterVariableAtIdentifierLength([NotNull] TetlParser.VariableAtIdentifierLengthContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="TetlParser.variableAtIdentifierLength"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitVariableAtIdentifierLength([NotNull] TetlParser.VariableAtIdentifierLengthContext context);
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="TetlParser.nExpression"/>.

@@ -33,14 +33,6 @@ using IToken = Antlr4.Runtime.IToken;
 [System.CLSCompliant(false)]
 public interface ITetlVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <summary>
-	/// Visit a parse tree produced by the <c>parenthesizedExpression</c>
-	/// labeled alternative in <see cref="TetlParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitParenthesizedExpression([NotNull] TetlParser.ParenthesizedExpressionContext context);
-
-	/// <summary>
 	/// Visit a parse tree produced by the <c>constantExpression</c>
 	/// labeled alternative in <see cref="TetlParser.expression"/>.
 	/// </summary>
@@ -89,14 +81,6 @@ public interface ITetlVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitIdentifierExpression([NotNull] TetlParser.IdentifierExpressionContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by the <c>functionCallExpression</c>
-	/// labeled alternative in <see cref="TetlParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitFunctionCallExpression([NotNull] TetlParser.FunctionCallExpressionContext context);
-
-	/// <summary>
 	/// Visit a parse tree produced by the <c>notExpression</c>
 	/// labeled alternative in <see cref="TetlParser.expression"/>.
 	/// </summary>
@@ -127,6 +111,46 @@ public interface ITetlVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitBooleanExpression([NotNull] TetlParser.BooleanExpressionContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by the <c>variableAtIdentifierLengthExpression</c>
+	/// labeled alternative in <see cref="TetlParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitVariableAtIdentifierLengthExpression([NotNull] TetlParser.VariableAtIdentifierLengthExpressionContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by the <c>parenthesizedExpression</c>
+	/// labeled alternative in <see cref="TetlParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitParenthesizedExpression([NotNull] TetlParser.ParenthesizedExpressionContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by the <c>functionCallExpression</c>
+	/// labeled alternative in <see cref="TetlParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFunctionCallExpression([NotNull] TetlParser.FunctionCallExpressionContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by the <c>variableLengthExpression</c>
+	/// labeled alternative in <see cref="TetlParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitVariableLengthExpression([NotNull] TetlParser.VariableLengthExpressionContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by the <c>variableAtLengthExpression</c>
+	/// labeled alternative in <see cref="TetlParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitVariableAtLengthExpression([NotNull] TetlParser.VariableAtLengthExpressionContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="TetlParser.program"/>.
@@ -218,6 +242,27 @@ public interface ITetlVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitIndexInteger([NotNull] TetlParser.IndexIntegerContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="TetlParser.variableLength"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitVariableLength([NotNull] TetlParser.VariableLengthContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="TetlParser.variableAtLength"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitVariableAtLength([NotNull] TetlParser.VariableAtLengthContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="TetlParser.variableAtIdentifierLength"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitVariableAtIdentifierLength([NotNull] TetlParser.VariableAtIdentifierLengthContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="TetlParser.nExpression"/>.
