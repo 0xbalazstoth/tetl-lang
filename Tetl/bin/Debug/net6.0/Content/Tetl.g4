@@ -18,7 +18,8 @@ assignment: IDENTIFIER '=' expression;
 
 functionCall: IDENTIFIER '(' (expression (',' expression)*)? ')';
 arrayInit: '[' expression (',' expression)* ']';
-index: IDENTIFIER '[' INTEGER ']';
+indexVariable: varName=IDENTIFIER '[' at=IDENTIFIER ']';
+indexInteger: varName=IDENTIFIER '[' at=INTEGER ']';
 nExpression: '!' expression;
 
 expression
@@ -28,7 +29,8 @@ expression
 	| '(' expression ')'					#parenthesizedExpression
 	| nExpression				            #notExpression
 	| arrayInit                             #arrayExpression
-	| index                                 #indexExpression
+	| indexVariable                         #indexVariableExpression
+	| indexInteger                          #indexIntegerExpression
 	| expression multOp expression			#multiplicativeExpression
 	| expression addOp expression			#additiveExpression
 	| expression compareOp expression		#comparisonExpression

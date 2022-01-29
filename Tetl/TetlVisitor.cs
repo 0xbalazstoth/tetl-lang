@@ -89,22 +89,48 @@ public class TetlVisitor : TetlBaseVisitor<object?>
     }
     #endregion
 
-    public override object? VisitIndex(TetlParser.IndexContext context)
+    #region Indexing
+    public override object? VisitIndexVariable(TetlParser.IndexVariableContext context)
     {
-        var varName = context.IDENTIFIER().GetText();
-        int index = Convert.ToInt32(context.INTEGER().GetText());
+        var varName = context.varName.Text;
+        var indexVariableName = context.at.Text;
+        var indexVariableValue = Convert.ToInt32(Variables.GetValueOrDefault(indexVariableName));
+        object? value = null;
         
         if (Variables[varName] != null)
         {
             if (Variables.ContainsKey(varName))
             {
                 var array = Variables.GetValueOrDefault(varName);
-                ;
+                var elements = array as List<object?>;
+                var element = elements?[indexVariableValue];
+                value = element;
             }
         }
 
-        return null;
+        return value;
     }
+
+    public override object? VisitIndexInteger(TetlParser.IndexIntegerContext context)
+    {
+        var varName = context.varName.Text;
+        int indexINTEGER = Convert.ToInt32(context.INTEGER().GetText());
+        object? value = null;
+        
+        if (Variables[varName] != null)
+        {
+            if (Variables.ContainsKey(varName))
+            {
+                var array = Variables.GetValueOrDefault(varName);
+                var elements = array as List<object?>;
+                var element = elements?[indexINTEGER];
+                value = element;
+            }
+        }
+
+        return value;
+    }
+    #endregion
 
     public override object? VisitIdentifierExpression(TetlParser.IdentifierExpressionContext context)
     {

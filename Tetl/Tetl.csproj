@@ -27,6 +27,7 @@
       <None Update="Tests\test_comparison.tetl">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Remove="Tests\test_for_loop.tetl" />
     </ItemGroup>
 
 </Project>

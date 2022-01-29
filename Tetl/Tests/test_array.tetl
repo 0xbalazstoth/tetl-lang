@@ -2,3 +2,16 @@
 
 array = [1, 2, 3, 4, 5, 7+7];
 array2 = ["orange", "apple"];
+indexAt = 3;
+OutNewLine(array[5]);
+OutNewLine(array2[1]);
+OutNewLine(array[indexAt]);
+OutNewLine("");
+
+i = 0;
+while (i < 6)
+{
+    actual = array[i];
+    OutNewLine(actual + 2);
+    i = i + 1;
+}

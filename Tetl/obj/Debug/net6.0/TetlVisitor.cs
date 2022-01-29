@@ -57,12 +57,28 @@ public interface ITetlVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitArrayExpression([NotNull] TetlParser.ArrayExpressionContext context);
 
 	/// <summary>
+	/// Visit a parse tree produced by the <c>indexVariableExpression</c>
+	/// labeled alternative in <see cref="TetlParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitIndexVariableExpression([NotNull] TetlParser.IndexVariableExpressionContext context);
+
+	/// <summary>
 	/// Visit a parse tree produced by the <c>additiveExpression</c>
 	/// labeled alternative in <see cref="TetlParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitAdditiveExpression([NotNull] TetlParser.AdditiveExpressionContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by the <c>indexIntegerExpression</c>
+	/// labeled alternative in <see cref="TetlParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitIndexIntegerExpression([NotNull] TetlParser.IndexIntegerExpressionContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by the <c>identifierExpression</c>
@@ -95,14 +111,6 @@ public interface ITetlVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitComparisonExpression([NotNull] TetlParser.ComparisonExpressionContext context);
-
-	/// <summary>
-	/// Visit a parse tree produced by the <c>indexExpression</c>
-	/// labeled alternative in <see cref="TetlParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitIndexExpression([NotNull] TetlParser.IndexExpressionContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by the <c>multiplicativeExpression</c>
@@ -198,11 +206,18 @@ public interface ITetlVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitArrayInit([NotNull] TetlParser.ArrayInitContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="TetlParser.index"/>.
+	/// Visit a parse tree produced by <see cref="TetlParser.indexVariable"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitIndex([NotNull] TetlParser.IndexContext context);
+	Result VisitIndexVariable([NotNull] TetlParser.IndexVariableContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="TetlParser.indexInteger"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitIndexInteger([NotNull] TetlParser.IndexIntegerContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="TetlParser.nExpression"/>.

@@ -4,7 +4,7 @@ using Antlr4.Runtime;
 using Tetl.Content;
 using Tetl;
 
-var fileName = @"C:\Users\rpgix\RiderProjects\Tetl\Tetl\Tests\test_for_loop.tetl";
+var fileName = @"C:\Users\rpgix\RiderProjects\Tetl\Tetl\Tests\test_array.tetl";
 var fileContents = File.ReadAllText(fileName);
 var inputStream = new AntlrInputStream(fileContents);
 var tetlLexer = new TetlLexer(inputStream);
