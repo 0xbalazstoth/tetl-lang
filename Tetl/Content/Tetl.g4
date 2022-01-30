@@ -5,11 +5,10 @@ program: line* EOF;
 line: statement | ifElseBlock | whileBlock | forBlock;
 
 // Statement
-statement: (assignment|functionCall) ';';
+statement: (assignment|functionCall|dotFields) ';';
 
 // Blocks
 ifElseBlock: IF '(' expression ')' block (ELSE elseIfBlock)?;
-//ifBlock: IF '(' expression ')' block?;
 elseIfBlock: block | ifElseBlock;
 whileBlock: WHILE '(' expression ')' block;
 forBlock: FOR '(' assignment ';' expression ')' block;
@@ -28,6 +27,7 @@ indexInteger: varName=IDENTIFIER '[' at=INTEGER ']' | varName=IDENTIFIER '.At' '
 variableLength: varName=IDENTIFIER LENGTH;
 variableAtLength: indexInteger LENGTH;
 variableAtIdentifierLength: indexVariable LENGTH;
+dotFields: varName=IDENTIFIER ('.' dotFunction=functionCall)*;
 
 // Negate
 nExpression: '!' expression;

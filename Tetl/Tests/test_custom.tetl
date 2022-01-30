@@ -1,5 +1,5 @@
->> Sorozatszámítás tételek
-array = [1, 2, 3, 4, 5, 6];
+>> Sorozatszámítás tétele
+>*array = [1, 2, 3, 4, 5, 6];
 i = 0;
 ertek = 0;
 n = array.Length();
@@ -13,5 +13,35 @@ while (i < n)
     i = i + 1;
 }
 
-OutNewLine(ertek);
+OutNewLine("Sorozatszámítás: " + ertek);
 OutNewLine("");
+
+>> Eldöntés tétele
+i = 0;
+array = [33, 3, 4, 23, 467];
+n = array.Length() - 1;
+while (i < n && array[i] % 2 != 0)
+{
+    i = i + 1;
+}
+
+van = i < n;
+OutNewLine("Eldöntés tétele: " + van);
+OutNewLine("");
+
+>> Módosított eldöntés tétele
+i = 0;
+array = [6, 8, 2, 12];
+n = array.Length();
+c = 0;
+while (i < n)
+{
+    if (array[i] % 2 == 0)
+    {
+        c = c + 1;  
+    }
+    i = i + 1;
+}
+van = c >= n;
+OutNewLine("Módosított eldöntés: " + van);
+OutNewLine("");*<

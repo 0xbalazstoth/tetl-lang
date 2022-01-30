@@ -60,4 +60,8 @@ namespace Tetl
     public class TetlIfElseConditionNullException : TetlBaseException
     {
     }
+
+    public class TetlFunctionNotAvailableForThisTypeException : TetlBaseException
+    {
+    }
 }

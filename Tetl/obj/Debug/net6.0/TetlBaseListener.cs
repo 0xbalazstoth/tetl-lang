@@ -469,6 +469,19 @@ public partial class TetlBaseListener : ITetlListener {
 	public virtual void ExitVariableAtIdentifierLength([NotNull] TetlParser.VariableAtIdentifierLengthContext context) { }
 
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="TetlParser.dotFields"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterDotFields([NotNull] TetlParser.DotFieldsContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="TetlParser.dotFields"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitDotFields([NotNull] TetlParser.DotFieldsContext context) { }
+
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="TetlParser.nExpression"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>

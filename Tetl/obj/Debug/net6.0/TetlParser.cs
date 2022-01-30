@@ -33,39 +33,39 @@ public partial class TetlParser : Parser {
 	public const int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
-		T__17=18, T__18=19, T__19=20, T__20=21, T__21=22, BOOL_OPERATOR=23, LENGTH=24, 
-		INTEGER=25, FLOAT=26, STRING=27, BOOL=28, NULL=29, FOR=30, IN=31, FOREACH=32, 
-		DO=33, WHILE=34, IF=35, ELSE=36, COMMENT=37, LINE_COMMENT=38, LINE_BREAK=39, 
-		WS=40, IDENTIFIER=41;
+		T__17=18, T__18=19, T__19=20, T__20=21, T__21=22, T__22=23, BOOL_OPERATOR=24, 
+		LENGTH=25, INTEGER=26, FLOAT=27, STRING=28, BOOL=29, NULL=30, FOR=31, 
+		IN=32, FOREACH=33, DO=34, WHILE=35, IF=36, ELSE=37, COMMENT=38, LINE_COMMENT=39, 
+		LINE_BREAK=40, WS=41, IDENTIFIER=42;
 	public const int
 		RULE_program = 0, RULE_line = 1, RULE_statement = 2, RULE_ifElseBlock = 3, 
 		RULE_elseIfBlock = 4, RULE_whileBlock = 5, RULE_forBlock = 6, RULE_block = 7, 
 		RULE_assignment = 8, RULE_functionCall = 9, RULE_arrayInit = 10, RULE_indexVariable = 11, 
 		RULE_indexInteger = 12, RULE_variableLength = 13, RULE_variableAtLength = 14, 
-		RULE_variableAtIdentifierLength = 15, RULE_nExpression = 16, RULE_expression = 17, 
-		RULE_multOp = 18, RULE_addOp = 19, RULE_compareOp = 20, RULE_boolOp = 21, 
-		RULE_constant = 22;
+		RULE_variableAtIdentifierLength = 15, RULE_dotFields = 16, RULE_nExpression = 17, 
+		RULE_expression = 18, RULE_multOp = 19, RULE_addOp = 20, RULE_compareOp = 21, 
+		RULE_boolOp = 22, RULE_constant = 23;
 	public static readonly string[] ruleNames = {
 		"program", "line", "statement", "ifElseBlock", "elseIfBlock", "whileBlock", 
 		"forBlock", "block", "assignment", "functionCall", "arrayInit", "indexVariable", 
 		"indexInteger", "variableLength", "variableAtLength", "variableAtIdentifierLength", 
-		"nExpression", "expression", "multOp", "addOp", "compareOp", "boolOp", 
-		"constant"
+		"dotFields", "nExpression", "expression", "multOp", "addOp", "compareOp", 
+		"boolOp", "constant"
 	};
 
 	private static readonly string[] _LiteralNames = {
 		null, "';'", "'('", "')'", "'{'", "'}'", "'='", "','", "'['", "']'", "'.At'", 
-		"'!'", "'*'", "'/'", "'%'", "'+'", "'-'", "'=='", "'!='", "'>'", "'<'", 
-		"'>='", "'<='", null, "'.Length()'", null, null, null, null, "'null'", 
+		"'.'", "'!'", "'*'", "'/'", "'%'", "'+'", "'-'", "'=='", "'!='", "'>'", 
+		"'<'", "'>='", "'<='", null, "'.Length()'", null, null, null, null, "'null'", 
 		"'for'", "'in'", "'foreach'", "'do'", null, "'if'", "'else'", null, null, 
 		"'\n'"
 	};
 	private static readonly string[] _SymbolicNames = {
 		null, null, null, null, null, null, null, null, null, null, null, null, 
-		null, null, null, null, null, null, null, null, null, null, null, "BOOL_OPERATOR", 
-		"LENGTH", "INTEGER", "FLOAT", "STRING", "BOOL", "NULL", "FOR", "IN", "FOREACH", 
-		"DO", "WHILE", "IF", "ELSE", "COMMENT", "LINE_COMMENT", "LINE_BREAK", 
-		"WS", "IDENTIFIER"
+		null, null, null, null, null, null, null, null, null, null, null, null, 
+		"BOOL_OPERATOR", "LENGTH", "INTEGER", "FLOAT", "STRING", "BOOL", "NULL", 
+		"FOR", "IN", "FOREACH", "DO", "WHILE", "IF", "ELSE", "COMMENT", "LINE_COMMENT", 
+		"LINE_BREAK", "WS", "IDENTIFIER"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
 
@@ -153,20 +153,20 @@ public partial class TetlParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 49;
+			State = 51;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << FOR) | (1L << WHILE) | (1L << IF) | (1L << IDENTIFIER))) != 0)) {
 				{
 				{
-				State = 46; line();
+				State = 48; line();
 				}
 				}
-				State = 51;
+				State = 53;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 			}
-			State = 52; Match(Eof);
+			State = 54; Match(Eof);
 			}
 		}
 		catch (RecognitionException re) {
@@ -218,31 +218,31 @@ public partial class TetlParser : Parser {
 		LineContext _localctx = new LineContext(_ctx, State);
 		EnterRule(_localctx, 2, RULE_line);
 		try {
-			State = 58;
+			State = 60;
 			_errHandler.Sync(this);
 			switch (_input.La(1)) {
 			case IDENTIFIER:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 54; statement();
+				State = 56; statement();
 				}
 				break;
 			case IF:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 55; ifElseBlock();
+				State = 57; ifElseBlock();
 				}
 				break;
 			case WHILE:
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 56; whileBlock();
+				State = 58; whileBlock();
 				}
 				break;
 			case FOR:
 				EnterOuterAlt(_localctx, 4);
 				{
-				State = 57; forBlock();
+				State = 59; forBlock();
 				}
 				break;
 			default:
@@ -266,6 +266,9 @@ public partial class TetlParser : Parser {
 		}
 		public FunctionCallContext functionCall() {
 			return GetRuleContext<FunctionCallContext>(0);
+		}
+		public DotFieldsContext dotFields() {
+			return GetRuleContext<DotFieldsContext>(0);
 		}
 		public StatementContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
@@ -294,22 +297,28 @@ public partial class TetlParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 62;
+			State = 65;
 			_errHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(_input,2,_ctx) ) {
 			case 1:
 				{
-				State = 60; assignment();
+				State = 62; assignment();
 				}
 				break;
 
 			case 2:
 				{
-				State = 61; functionCall();
+				State = 63; functionCall();
+				}
+				break;
+
+			case 3:
+				{
+				State = 64; dotFields();
 				}
 				break;
 			}
-			State = 64; Match(T__0);
+			State = 67; Match(T__0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -363,18 +372,18 @@ public partial class TetlParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 66; Match(IF);
-			State = 67; Match(T__1);
-			State = 68; expression(0);
-			State = 69; Match(T__2);
-			State = 70; block();
-			State = 73;
+			State = 69; Match(IF);
+			State = 70; Match(T__1);
+			State = 71; expression(0);
+			State = 72; Match(T__2);
+			State = 73; block();
+			State = 76;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			if (_la==ELSE) {
 				{
-				State = 71; Match(ELSE);
-				State = 72; elseIfBlock();
+				State = 74; Match(ELSE);
+				State = 75; elseIfBlock();
 				}
 			}
 
@@ -423,19 +432,19 @@ public partial class TetlParser : Parser {
 		ElseIfBlockContext _localctx = new ElseIfBlockContext(_ctx, State);
 		EnterRule(_localctx, 8, RULE_elseIfBlock);
 		try {
-			State = 77;
+			State = 80;
 			_errHandler.Sync(this);
 			switch (_input.La(1)) {
 			case T__3:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 75; block();
+				State = 78; block();
 				}
 				break;
 			case IF:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 76; ifElseBlock();
+				State = 79; ifElseBlock();
 				}
 				break;
 			default:
@@ -488,11 +497,11 @@ public partial class TetlParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 79; Match(WHILE);
-			State = 80; Match(T__1);
-			State = 81; expression(0);
-			State = 82; Match(T__2);
-			State = 83; block();
+			State = 82; Match(WHILE);
+			State = 83; Match(T__1);
+			State = 84; expression(0);
+			State = 85; Match(T__2);
+			State = 86; block();
 			}
 		}
 		catch (RecognitionException re) {
@@ -544,13 +553,13 @@ public partial class TetlParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 85; Match(FOR);
-			State = 86; Match(T__1);
-			State = 87; assignment();
-			State = 88; Match(T__0);
-			State = 89; expression(0);
-			State = 90; Match(T__2);
-			State = 91; block();
+			State = 88; Match(FOR);
+			State = 89; Match(T__1);
+			State = 90; assignment();
+			State = 91; Match(T__0);
+			State = 92; expression(0);
+			State = 93; Match(T__2);
+			State = 94; block();
 			}
 		}
 		catch (RecognitionException re) {
@@ -599,21 +608,21 @@ public partial class TetlParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 93; Match(T__3);
-			State = 97;
+			State = 96; Match(T__3);
+			State = 100;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << FOR) | (1L << WHILE) | (1L << IF) | (1L << IDENTIFIER))) != 0)) {
 				{
 				{
-				State = 94; line();
+				State = 97; line();
 				}
 				}
-				State = 99;
+				State = 102;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 			}
-			State = 100; Match(T__4);
+			State = 103; Match(T__4);
 			}
 		}
 		catch (RecognitionException re) {
@@ -659,9 +668,9 @@ public partial class TetlParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 102; Match(IDENTIFIER);
-			State = 103; Match(T__5);
-			State = 104; expression(0);
+			State = 105; Match(IDENTIFIER);
+			State = 106; Match(T__5);
+			State = 107; expression(0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -711,32 +720,32 @@ public partial class TetlParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 106; Match(IDENTIFIER);
-			State = 107; Match(T__1);
-			State = 116;
+			State = 109; Match(IDENTIFIER);
+			State = 110; Match(T__1);
+			State = 119;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__7) | (1L << T__10) | (1L << INTEGER) | (1L << FLOAT) | (1L << STRING) | (1L << BOOL) | (1L << NULL) | (1L << IDENTIFIER))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__7) | (1L << T__11) | (1L << INTEGER) | (1L << FLOAT) | (1L << STRING) | (1L << BOOL) | (1L << NULL) | (1L << IDENTIFIER))) != 0)) {
 				{
-				State = 108; expression(0);
-				State = 113;
+				State = 111; expression(0);
+				State = 116;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 				while (_la==T__6) {
 					{
 					{
-					State = 109; Match(T__6);
-					State = 110; expression(0);
+					State = 112; Match(T__6);
+					State = 113; expression(0);
 					}
 					}
-					State = 115;
+					State = 118;
 					_errHandler.Sync(this);
 					_la = _input.La(1);
 				}
 				}
 			}
 
-			State = 118; Match(T__2);
+			State = 121; Match(T__2);
 			}
 		}
 		catch (RecognitionException re) {
@@ -785,23 +794,23 @@ public partial class TetlParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 120; Match(T__7);
-			State = 121; expression(0);
-			State = 126;
+			State = 123; Match(T__7);
+			State = 124; expression(0);
+			State = 129;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			while (_la==T__6) {
 				{
 				{
-				State = 122; Match(T__6);
-				State = 123; expression(0);
+				State = 125; Match(T__6);
+				State = 126; expression(0);
 				}
 				}
-				State = 128;
+				State = 131;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 			}
-			State = 129; Match(T__8);
+			State = 132; Match(T__8);
 			}
 		}
 		catch (RecognitionException re) {
@@ -847,27 +856,27 @@ public partial class TetlParser : Parser {
 		IndexVariableContext _localctx = new IndexVariableContext(_ctx, State);
 		EnterRule(_localctx, 22, RULE_indexVariable);
 		try {
-			State = 140;
+			State = 143;
 			_errHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(_input,9,_ctx) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 131; _localctx.varName = Match(IDENTIFIER);
-				State = 132; Match(T__7);
-				State = 133; _localctx.at = Match(IDENTIFIER);
-				State = 134; Match(T__8);
+				State = 134; _localctx.varName = Match(IDENTIFIER);
+				State = 135; Match(T__7);
+				State = 136; _localctx.at = Match(IDENTIFIER);
+				State = 137; Match(T__8);
 				}
 				break;
 
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 135; _localctx.varName = Match(IDENTIFIER);
-				State = 136; Match(T__9);
-				State = 137; Match(T__1);
-				State = 138; _localctx.at = Match(IDENTIFIER);
-				State = 139; Match(T__2);
+				State = 138; _localctx.varName = Match(IDENTIFIER);
+				State = 139; Match(T__9);
+				State = 140; Match(T__1);
+				State = 141; _localctx.at = Match(IDENTIFIER);
+				State = 142; Match(T__2);
 				}
 				break;
 			}
@@ -913,27 +922,27 @@ public partial class TetlParser : Parser {
 		IndexIntegerContext _localctx = new IndexIntegerContext(_ctx, State);
 		EnterRule(_localctx, 24, RULE_indexInteger);
 		try {
-			State = 151;
+			State = 154;
 			_errHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(_input,10,_ctx) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 142; _localctx.varName = Match(IDENTIFIER);
-				State = 143; Match(T__7);
-				State = 144; _localctx.at = Match(INTEGER);
-				State = 145; Match(T__8);
+				State = 145; _localctx.varName = Match(IDENTIFIER);
+				State = 146; Match(T__7);
+				State = 147; _localctx.at = Match(INTEGER);
+				State = 148; Match(T__8);
 				}
 				break;
 
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 146; _localctx.varName = Match(IDENTIFIER);
-				State = 147; Match(T__9);
-				State = 148; Match(T__1);
-				State = 149; _localctx.at = Match(INTEGER);
-				State = 150; Match(T__2);
+				State = 149; _localctx.varName = Match(IDENTIFIER);
+				State = 150; Match(T__9);
+				State = 151; Match(T__1);
+				State = 152; _localctx.at = Match(INTEGER);
+				State = 153; Match(T__2);
 				}
 				break;
 			}
@@ -980,8 +989,8 @@ public partial class TetlParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 153; _localctx.varName = Match(IDENTIFIER);
-			State = 154; Match(LENGTH);
+			State = 156; _localctx.varName = Match(IDENTIFIER);
+			State = 157; Match(LENGTH);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1027,8 +1036,8 @@ public partial class TetlParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 156; indexInteger();
-			State = 157; Match(LENGTH);
+			State = 159; indexInteger();
+			State = 160; Match(LENGTH);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1074,8 +1083,74 @@ public partial class TetlParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 159; indexVariable();
-			State = 160; Match(LENGTH);
+			State = 162; indexVariable();
+			State = 163; Match(LENGTH);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class DotFieldsContext : ParserRuleContext {
+		public IToken varName;
+		public FunctionCallContext dotFunction;
+		public ITerminalNode IDENTIFIER() { return GetToken(TetlParser.IDENTIFIER, 0); }
+		public FunctionCallContext[] functionCall() {
+			return GetRuleContexts<FunctionCallContext>();
+		}
+		public FunctionCallContext functionCall(int i) {
+			return GetRuleContext<FunctionCallContext>(i);
+		}
+		public DotFieldsContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_dotFields; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			ITetlListener typedListener = listener as ITetlListener;
+			if (typedListener != null) typedListener.EnterDotFields(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			ITetlListener typedListener = listener as ITetlListener;
+			if (typedListener != null) typedListener.ExitDotFields(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			ITetlVisitor<TResult> typedVisitor = visitor as ITetlVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDotFields(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public DotFieldsContext dotFields() {
+		DotFieldsContext _localctx = new DotFieldsContext(_ctx, State);
+		EnterRule(_localctx, 32, RULE_dotFields);
+		int _la;
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 165; _localctx.varName = Match(IDENTIFIER);
+			State = 170;
+			_errHandler.Sync(this);
+			_la = _input.La(1);
+			while (_la==T__10) {
+				{
+				{
+				State = 166; Match(T__10);
+				State = 167; _localctx.dotFunction = functionCall();
+				}
+				}
+				State = 172;
+				_errHandler.Sync(this);
+				_la = _input.La(1);
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -1116,12 +1191,12 @@ public partial class TetlParser : Parser {
 	[RuleVersion(0)]
 	public NExpressionContext nExpression() {
 		NExpressionContext _localctx = new NExpressionContext(_ctx, State);
-		EnterRule(_localctx, 32, RULE_nExpression);
+		EnterRule(_localctx, 34, RULE_nExpression);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 162; Match(T__10);
-			State = 163; expression(0);
+			State = 173; Match(T__11);
+			State = 174; expression(0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1465,22 +1540,22 @@ public partial class TetlParser : Parser {
 		int _parentState = State;
 		ExpressionContext _localctx = new ExpressionContext(_ctx, _parentState);
 		ExpressionContext _prevctx = _localctx;
-		int _startState = 34;
-		EnterRecursionRule(_localctx, 34, RULE_expression, _p);
+		int _startState = 36;
+		EnterRecursionRule(_localctx, 36, RULE_expression, _p);
 		try {
 			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 180;
+			State = 191;
 			_errHandler.Sync(this);
-			switch ( Interpreter.AdaptivePredict(_input,11,_ctx) ) {
+			switch ( Interpreter.AdaptivePredict(_input,12,_ctx) ) {
 			case 1:
 				{
 				_localctx = new ConstantExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
-				State = 166; constant();
+				State = 177; constant();
 				}
 				break;
 
@@ -1489,7 +1564,7 @@ public partial class TetlParser : Parser {
 				_localctx = new IdentifierExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				State = 167; Match(IDENTIFIER);
+				State = 178; Match(IDENTIFIER);
 				}
 				break;
 
@@ -1498,7 +1573,7 @@ public partial class TetlParser : Parser {
 				_localctx = new FunctionCallExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				State = 168; functionCall();
+				State = 179; functionCall();
 				}
 				break;
 
@@ -1507,9 +1582,9 @@ public partial class TetlParser : Parser {
 				_localctx = new ParenthesizedExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				State = 169; Match(T__1);
-				State = 170; expression(0);
-				State = 171; Match(T__2);
+				State = 180; Match(T__1);
+				State = 181; expression(0);
+				State = 182; Match(T__2);
 				}
 				break;
 
@@ -1518,7 +1593,7 @@ public partial class TetlParser : Parser {
 				_localctx = new NotExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				State = 173; nExpression();
+				State = 184; nExpression();
 				}
 				break;
 
@@ -1527,7 +1602,7 @@ public partial class TetlParser : Parser {
 				_localctx = new ArrayExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				State = 174; arrayInit();
+				State = 185; arrayInit();
 				}
 				break;
 
@@ -1536,7 +1611,7 @@ public partial class TetlParser : Parser {
 				_localctx = new IndexVariableExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				State = 175; indexVariable();
+				State = 186; indexVariable();
 				}
 				break;
 
@@ -1545,7 +1620,7 @@ public partial class TetlParser : Parser {
 				_localctx = new IndexIntegerExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				State = 176; indexInteger();
+				State = 187; indexInteger();
 				}
 				break;
 
@@ -1554,7 +1629,7 @@ public partial class TetlParser : Parser {
 				_localctx = new VariableLengthExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				State = 177; variableLength();
+				State = 188; variableLength();
 				}
 				break;
 
@@ -1563,7 +1638,7 @@ public partial class TetlParser : Parser {
 				_localctx = new VariableAtLengthExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				State = 178; variableAtLength();
+				State = 189; variableAtLength();
 				}
 				break;
 
@@ -1572,30 +1647,30 @@ public partial class TetlParser : Parser {
 				_localctx = new VariableAtIdentifierLengthExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				State = 179; variableAtIdentifierLength();
+				State = 190; variableAtIdentifierLength();
 				}
 				break;
 			}
 			_ctx.stop = _input.Lt(-1);
-			State = 200;
+			State = 211;
 			_errHandler.Sync(this);
-			_alt = Interpreter.AdaptivePredict(_input,13,_ctx);
+			_alt = Interpreter.AdaptivePredict(_input,14,_ctx);
 			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) TriggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					State = 198;
+					State = 209;
 					_errHandler.Sync(this);
-					switch ( Interpreter.AdaptivePredict(_input,12,_ctx) ) {
+					switch ( Interpreter.AdaptivePredict(_input,13,_ctx) ) {
 					case 1:
 						{
 						_localctx = new MultiplicativeExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 182;
+						State = 193;
 						if (!(Precpred(_ctx, 4))) throw new FailedPredicateException(this, "Precpred(_ctx, 4)");
-						State = 183; multOp();
-						State = 184; expression(5);
+						State = 194; multOp();
+						State = 195; expression(5);
 						}
 						break;
 
@@ -1603,10 +1678,10 @@ public partial class TetlParser : Parser {
 						{
 						_localctx = new AdditiveExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 186;
+						State = 197;
 						if (!(Precpred(_ctx, 3))) throw new FailedPredicateException(this, "Precpred(_ctx, 3)");
-						State = 187; addOp();
-						State = 188; expression(4);
+						State = 198; addOp();
+						State = 199; expression(4);
 						}
 						break;
 
@@ -1614,10 +1689,10 @@ public partial class TetlParser : Parser {
 						{
 						_localctx = new ComparisonExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 190;
+						State = 201;
 						if (!(Precpred(_ctx, 2))) throw new FailedPredicateException(this, "Precpred(_ctx, 2)");
-						State = 191; compareOp();
-						State = 192; expression(3);
+						State = 202; compareOp();
+						State = 203; expression(3);
 						}
 						break;
 
@@ -1625,18 +1700,18 @@ public partial class TetlParser : Parser {
 						{
 						_localctx = new BooleanExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 194;
+						State = 205;
 						if (!(Precpred(_ctx, 1))) throw new FailedPredicateException(this, "Precpred(_ctx, 1)");
-						State = 195; boolOp();
-						State = 196; expression(2);
+						State = 206; boolOp();
+						State = 207; expression(2);
 						}
 						break;
 					}
 					} 
 				}
-				State = 202;
+				State = 213;
 				_errHandler.Sync(this);
-				_alt = Interpreter.AdaptivePredict(_input,13,_ctx);
+				_alt = Interpreter.AdaptivePredict(_input,14,_ctx);
 			}
 			}
 		}
@@ -1675,14 +1750,14 @@ public partial class TetlParser : Parser {
 	[RuleVersion(0)]
 	public MultOpContext multOp() {
 		MultOpContext _localctx = new MultOpContext(_ctx, State);
-		EnterRule(_localctx, 36, RULE_multOp);
+		EnterRule(_localctx, 38, RULE_multOp);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 203;
+			State = 214;
 			_la = _input.La(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__11) | (1L << T__12) | (1L << T__13))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__12) | (1L << T__13) | (1L << T__14))) != 0)) ) {
 			_errHandler.RecoverInline(this);
 			} else {
 				if (_input.La(1) == TokenConstants.Eof) {
@@ -1729,14 +1804,14 @@ public partial class TetlParser : Parser {
 	[RuleVersion(0)]
 	public AddOpContext addOp() {
 		AddOpContext _localctx = new AddOpContext(_ctx, State);
-		EnterRule(_localctx, 38, RULE_addOp);
+		EnterRule(_localctx, 40, RULE_addOp);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 205;
+			State = 216;
 			_la = _input.La(1);
-			if ( !(_la==T__14 || _la==T__15) ) {
+			if ( !(_la==T__15 || _la==T__16) ) {
 			_errHandler.RecoverInline(this);
 			} else {
 				if (_input.La(1) == TokenConstants.Eof) {
@@ -1783,14 +1858,14 @@ public partial class TetlParser : Parser {
 	[RuleVersion(0)]
 	public CompareOpContext compareOp() {
 		CompareOpContext _localctx = new CompareOpContext(_ctx, State);
-		EnterRule(_localctx, 40, RULE_compareOp);
+		EnterRule(_localctx, 42, RULE_compareOp);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 207;
+			State = 218;
 			_la = _input.La(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__16) | (1L << T__17) | (1L << T__18) | (1L << T__19) | (1L << T__20) | (1L << T__21))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__17) | (1L << T__18) | (1L << T__19) | (1L << T__20) | (1L << T__21) | (1L << T__22))) != 0)) ) {
 			_errHandler.RecoverInline(this);
 			} else {
 				if (_input.La(1) == TokenConstants.Eof) {
@@ -1838,11 +1913,11 @@ public partial class TetlParser : Parser {
 	[RuleVersion(0)]
 	public BoolOpContext boolOp() {
 		BoolOpContext _localctx = new BoolOpContext(_ctx, State);
-		EnterRule(_localctx, 42, RULE_boolOp);
+		EnterRule(_localctx, 44, RULE_boolOp);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 209; Match(BOOL_OPERATOR);
+			State = 220; Match(BOOL_OPERATOR);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1885,12 +1960,12 @@ public partial class TetlParser : Parser {
 	[RuleVersion(0)]
 	public ConstantContext constant() {
 		ConstantContext _localctx = new ConstantContext(_ctx, State);
-		EnterRule(_localctx, 44, RULE_constant);
+		EnterRule(_localctx, 46, RULE_constant);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 211;
+			State = 222;
 			_la = _input.La(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INTEGER) | (1L << FLOAT) | (1L << STRING) | (1L << BOOL) | (1L << NULL))) != 0)) ) {
 			_errHandler.RecoverInline(this);
@@ -1917,7 +1992,7 @@ public partial class TetlParser : Parser {
 
 	public override bool Sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
-		case 17: return expression_sempred((ExpressionContext)_localctx, predIndex);
+		case 18: return expression_sempred((ExpressionContext)_localctx, predIndex);
 		}
 		return true;
 	}
@@ -1935,83 +2010,88 @@ public partial class TetlParser : Parser {
 	}
 
 	public static readonly string _serializedATN =
-		"\x3\xAF6F\x8320\x479D\xB75C\x4880\x1605\x191C\xAB37\x3+\xD8\x4\x2\t\x2"+
+		"\x3\xAF6F\x8320\x479D\xB75C\x4880\x1605\x191C\xAB37\x3,\xE3\x4\x2\t\x2"+
 		"\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x4\a\t\a\x4\b\t\b\x4\t\t"+
 		"\t\x4\n\t\n\x4\v\t\v\x4\f\t\f\x4\r\t\r\x4\xE\t\xE\x4\xF\t\xF\x4\x10\t"+
 		"\x10\x4\x11\t\x11\x4\x12\t\x12\x4\x13\t\x13\x4\x14\t\x14\x4\x15\t\x15"+
-		"\x4\x16\t\x16\x4\x17\t\x17\x4\x18\t\x18\x3\x2\a\x2\x32\n\x2\f\x2\xE\x2"+
-		"\x35\v\x2\x3\x2\x3\x2\x3\x3\x3\x3\x3\x3\x3\x3\x5\x3=\n\x3\x3\x4\x3\x4"+
-		"\x5\x4\x41\n\x4\x3\x4\x3\x4\x3\x5\x3\x5\x3\x5\x3\x5\x3\x5\x3\x5\x3\x5"+
-		"\x5\x5L\n\x5\x3\x6\x3\x6\x5\x6P\n\x6\x3\a\x3\a\x3\a\x3\a\x3\a\x3\a\x3"+
-		"\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\t\x3\t\a\t\x62\n\t\f\t\xE\t\x65"+
-		"\v\t\x3\t\x3\t\x3\n\x3\n\x3\n\x3\n\x3\v\x3\v\x3\v\x3\v\x3\v\a\vr\n\v\f"+
-		"\v\xE\vu\v\v\x5\vw\n\v\x3\v\x3\v\x3\f\x3\f\x3\f\x3\f\a\f\x7F\n\f\f\f\xE"+
-		"\f\x82\v\f\x3\f\x3\f\x3\r\x3\r\x3\r\x3\r\x3\r\x3\r\x3\r\x3\r\x3\r\x5\r"+
-		"\x8F\n\r\x3\xE\x3\xE\x3\xE\x3\xE\x3\xE\x3\xE\x3\xE\x3\xE\x3\xE\x5\xE\x9A"+
-		"\n\xE\x3\xF\x3\xF\x3\xF\x3\x10\x3\x10\x3\x10\x3\x11\x3\x11\x3\x11\x3\x12"+
-		"\x3\x12\x3\x12\x3\x13\x3\x13\x3\x13\x3\x13\x3\x13\x3\x13\x3\x13\x3\x13"+
-		"\x3\x13\x3\x13\x3\x13\x3\x13\x3\x13\x3\x13\x3\x13\x5\x13\xB7\n\x13\x3"+
-		"\x13\x3\x13\x3\x13\x3\x13\x3\x13\x3\x13\x3\x13\x3\x13\x3\x13\x3\x13\x3"+
-		"\x13\x3\x13\x3\x13\x3\x13\x3\x13\x3\x13\a\x13\xC9\n\x13\f\x13\xE\x13\xCC"+
-		"\v\x13\x3\x14\x3\x14\x3\x15\x3\x15\x3\x16\x3\x16\x3\x17\x3\x17\x3\x18"+
-		"\x3\x18\x3\x18\x2\x2\x3$\x19\x2\x2\x4\x2\x6\x2\b\x2\n\x2\f\x2\xE\x2\x10"+
-		"\x2\x12\x2\x14\x2\x16\x2\x18\x2\x1A\x2\x1C\x2\x1E\x2 \x2\"\x2$\x2&\x2"+
-		"(\x2*\x2,\x2.\x2\x2\x6\x3\x2\xE\x10\x3\x2\x11\x12\x3\x2\x13\x18\x3\x2"+
-		"\x1B\x1F\xDB\x2\x33\x3\x2\x2\x2\x4<\x3\x2\x2\x2\x6@\x3\x2\x2\x2\b\x44"+
-		"\x3\x2\x2\x2\nO\x3\x2\x2\x2\fQ\x3\x2\x2\x2\xEW\x3\x2\x2\x2\x10_\x3\x2"+
-		"\x2\x2\x12h\x3\x2\x2\x2\x14l\x3\x2\x2\x2\x16z\x3\x2\x2\x2\x18\x8E\x3\x2"+
-		"\x2\x2\x1A\x99\x3\x2\x2\x2\x1C\x9B\x3\x2\x2\x2\x1E\x9E\x3\x2\x2\x2 \xA1"+
-		"\x3\x2\x2\x2\"\xA4\x3\x2\x2\x2$\xB6\x3\x2\x2\x2&\xCD\x3\x2\x2\x2(\xCF"+
-		"\x3\x2\x2\x2*\xD1\x3\x2\x2\x2,\xD3\x3\x2\x2\x2.\xD5\x3\x2\x2\x2\x30\x32"+
-		"\x5\x4\x3\x2\x31\x30\x3\x2\x2\x2\x32\x35\x3\x2\x2\x2\x33\x31\x3\x2\x2"+
-		"\x2\x33\x34\x3\x2\x2\x2\x34\x36\x3\x2\x2\x2\x35\x33\x3\x2\x2\x2\x36\x37"+
-		"\a\x2\x2\x3\x37\x3\x3\x2\x2\x2\x38=\x5\x6\x4\x2\x39=\x5\b\x5\x2:=\x5\f"+
-		"\a\x2;=\x5\xE\b\x2<\x38\x3\x2\x2\x2<\x39\x3\x2\x2\x2<:\x3\x2\x2\x2<;\x3"+
-		"\x2\x2\x2=\x5\x3\x2\x2\x2>\x41\x5\x12\n\x2?\x41\x5\x14\v\x2@>\x3\x2\x2"+
-		"\x2@?\x3\x2\x2\x2\x41\x42\x3\x2\x2\x2\x42\x43\a\x3\x2\x2\x43\a\x3\x2\x2"+
-		"\x2\x44\x45\a%\x2\x2\x45\x46\a\x4\x2\x2\x46G\x5$\x13\x2GH\a\x5\x2\x2H"+
-		"K\x5\x10\t\x2IJ\a&\x2\x2JL\x5\n\x6\x2KI\x3\x2\x2\x2KL\x3\x2\x2\x2L\t\x3"+
-		"\x2\x2\x2MP\x5\x10\t\x2NP\x5\b\x5\x2OM\x3\x2\x2\x2ON\x3\x2\x2\x2P\v\x3"+
-		"\x2\x2\x2QR\a$\x2\x2RS\a\x4\x2\x2ST\x5$\x13\x2TU\a\x5\x2\x2UV\x5\x10\t"+
-		"\x2V\r\x3\x2\x2\x2WX\a \x2\x2XY\a\x4\x2\x2YZ\x5\x12\n\x2Z[\a\x3\x2\x2"+
-		"[\\\x5$\x13\x2\\]\a\x5\x2\x2]^\x5\x10\t\x2^\xF\x3\x2\x2\x2_\x63\a\x6\x2"+
-		"\x2`\x62\x5\x4\x3\x2\x61`\x3\x2\x2\x2\x62\x65\x3\x2\x2\x2\x63\x61\x3\x2"+
-		"\x2\x2\x63\x64\x3\x2\x2\x2\x64\x66\x3\x2\x2\x2\x65\x63\x3\x2\x2\x2\x66"+
-		"g\a\a\x2\x2g\x11\x3\x2\x2\x2hi\a+\x2\x2ij\a\b\x2\x2jk\x5$\x13\x2k\x13"+
-		"\x3\x2\x2\x2lm\a+\x2\x2mv\a\x4\x2\x2ns\x5$\x13\x2op\a\t\x2\x2pr\x5$\x13"+
-		"\x2qo\x3\x2\x2\x2ru\x3\x2\x2\x2sq\x3\x2\x2\x2st\x3\x2\x2\x2tw\x3\x2\x2"+
-		"\x2us\x3\x2\x2\x2vn\x3\x2\x2\x2vw\x3\x2\x2\x2wx\x3\x2\x2\x2xy\a\x5\x2"+
-		"\x2y\x15\x3\x2\x2\x2z{\a\n\x2\x2{\x80\x5$\x13\x2|}\a\t\x2\x2}\x7F\x5$"+
-		"\x13\x2~|\x3\x2\x2\x2\x7F\x82\x3\x2\x2\x2\x80~\x3\x2\x2\x2\x80\x81\x3"+
-		"\x2\x2\x2\x81\x83\x3\x2\x2\x2\x82\x80\x3\x2\x2\x2\x83\x84\a\v\x2\x2\x84"+
-		"\x17\x3\x2\x2\x2\x85\x86\a+\x2\x2\x86\x87\a\n\x2\x2\x87\x88\a+\x2\x2\x88"+
-		"\x8F\a\v\x2\x2\x89\x8A\a+\x2\x2\x8A\x8B\a\f\x2\x2\x8B\x8C\a\x4\x2\x2\x8C"+
-		"\x8D\a+\x2\x2\x8D\x8F\a\x5\x2\x2\x8E\x85\x3\x2\x2\x2\x8E\x89\x3\x2\x2"+
-		"\x2\x8F\x19\x3\x2\x2\x2\x90\x91\a+\x2\x2\x91\x92\a\n\x2\x2\x92\x93\a\x1B"+
-		"\x2\x2\x93\x9A\a\v\x2\x2\x94\x95\a+\x2\x2\x95\x96\a\f\x2\x2\x96\x97\a"+
-		"\x4\x2\x2\x97\x98\a\x1B\x2\x2\x98\x9A\a\x5\x2\x2\x99\x90\x3\x2\x2\x2\x99"+
-		"\x94\x3\x2\x2\x2\x9A\x1B\x3\x2\x2\x2\x9B\x9C\a+\x2\x2\x9C\x9D\a\x1A\x2"+
-		"\x2\x9D\x1D\x3\x2\x2\x2\x9E\x9F\x5\x1A\xE\x2\x9F\xA0\a\x1A\x2\x2\xA0\x1F"+
-		"\x3\x2\x2\x2\xA1\xA2\x5\x18\r\x2\xA2\xA3\a\x1A\x2\x2\xA3!\x3\x2\x2\x2"+
-		"\xA4\xA5\a\r\x2\x2\xA5\xA6\x5$\x13\x2\xA6#\x3\x2\x2\x2\xA7\xA8\b\x13\x1"+
-		"\x2\xA8\xB7\x5.\x18\x2\xA9\xB7\a+\x2\x2\xAA\xB7\x5\x14\v\x2\xAB\xAC\a"+
-		"\x4\x2\x2\xAC\xAD\x5$\x13\x2\xAD\xAE\a\x5\x2\x2\xAE\xB7\x3\x2\x2\x2\xAF"+
-		"\xB7\x5\"\x12\x2\xB0\xB7\x5\x16\f\x2\xB1\xB7\x5\x18\r\x2\xB2\xB7\x5\x1A"+
-		"\xE\x2\xB3\xB7\x5\x1C\xF\x2\xB4\xB7\x5\x1E\x10\x2\xB5\xB7\x5 \x11\x2\xB6"+
-		"\xA7\x3\x2\x2\x2\xB6\xA9\x3\x2\x2\x2\xB6\xAA\x3\x2\x2\x2\xB6\xAB\x3\x2"+
-		"\x2\x2\xB6\xAF\x3\x2\x2\x2\xB6\xB0\x3\x2\x2\x2\xB6\xB1\x3\x2\x2\x2\xB6"+
-		"\xB2\x3\x2\x2\x2\xB6\xB3\x3\x2\x2\x2\xB6\xB4\x3\x2\x2\x2\xB6\xB5\x3\x2"+
-		"\x2\x2\xB7\xCA\x3\x2\x2\x2\xB8\xB9\f\x6\x2\x2\xB9\xBA\x5&\x14\x2\xBA\xBB"+
-		"\x5$\x13\a\xBB\xC9\x3\x2\x2\x2\xBC\xBD\f\x5\x2\x2\xBD\xBE\x5(\x15\x2\xBE"+
-		"\xBF\x5$\x13\x6\xBF\xC9\x3\x2\x2\x2\xC0\xC1\f\x4\x2\x2\xC1\xC2\x5*\x16"+
-		"\x2\xC2\xC3\x5$\x13\x5\xC3\xC9\x3\x2\x2\x2\xC4\xC5\f\x3\x2\x2\xC5\xC6"+
-		"\x5,\x17\x2\xC6\xC7\x5$\x13\x4\xC7\xC9\x3\x2\x2\x2\xC8\xB8\x3\x2\x2\x2"+
-		"\xC8\xBC\x3\x2\x2\x2\xC8\xC0\x3\x2\x2\x2\xC8\xC4\x3\x2\x2\x2\xC9\xCC\x3"+
-		"\x2\x2\x2\xCA\xC8\x3\x2\x2\x2\xCA\xCB\x3\x2\x2\x2\xCB%\x3\x2\x2\x2\xCC"+
-		"\xCA\x3\x2\x2\x2\xCD\xCE\t\x2\x2\x2\xCE\'\x3\x2\x2\x2\xCF\xD0\t\x3\x2"+
-		"\x2\xD0)\x3\x2\x2\x2\xD1\xD2\t\x4\x2\x2\xD2+\x3\x2\x2\x2\xD3\xD4\a\x19"+
-		"\x2\x2\xD4-\x3\x2\x2\x2\xD5\xD6\t\x5\x2\x2\xD6/\x3\x2\x2\x2\x10\x33<@"+
-		"KO\x63sv\x80\x8E\x99\xB6\xC8\xCA";
+		"\x4\x16\t\x16\x4\x17\t\x17\x4\x18\t\x18\x4\x19\t\x19\x3\x2\a\x2\x34\n"+
+		"\x2\f\x2\xE\x2\x37\v\x2\x3\x2\x3\x2\x3\x3\x3\x3\x3\x3\x3\x3\x5\x3?\n\x3"+
+		"\x3\x4\x3\x4\x3\x4\x5\x4\x44\n\x4\x3\x4\x3\x4\x3\x5\x3\x5\x3\x5\x3\x5"+
+		"\x3\x5\x3\x5\x3\x5\x5\x5O\n\x5\x3\x6\x3\x6\x5\x6S\n\x6\x3\a\x3\a\x3\a"+
+		"\x3\a\x3\a\x3\a\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\t\x3\t\a\t"+
+		"\x65\n\t\f\t\xE\th\v\t\x3\t\x3\t\x3\n\x3\n\x3\n\x3\n\x3\v\x3\v\x3\v\x3"+
+		"\v\x3\v\a\vu\n\v\f\v\xE\vx\v\v\x5\vz\n\v\x3\v\x3\v\x3\f\x3\f\x3\f\x3\f"+
+		"\a\f\x82\n\f\f\f\xE\f\x85\v\f\x3\f\x3\f\x3\r\x3\r\x3\r\x3\r\x3\r\x3\r"+
+		"\x3\r\x3\r\x3\r\x5\r\x92\n\r\x3\xE\x3\xE\x3\xE\x3\xE\x3\xE\x3\xE\x3\xE"+
+		"\x3\xE\x3\xE\x5\xE\x9D\n\xE\x3\xF\x3\xF\x3\xF\x3\x10\x3\x10\x3\x10\x3"+
+		"\x11\x3\x11\x3\x11\x3\x12\x3\x12\x3\x12\a\x12\xAB\n\x12\f\x12\xE\x12\xAE"+
+		"\v\x12\x3\x13\x3\x13\x3\x13\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14"+
+		"\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x5\x14"+
+		"\xC2\n\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3"+
+		"\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\a\x14\xD4\n\x14"+
+		"\f\x14\xE\x14\xD7\v\x14\x3\x15\x3\x15\x3\x16\x3\x16\x3\x17\x3\x17\x3\x18"+
+		"\x3\x18\x3\x19\x3\x19\x3\x19\x2\x2\x3&\x1A\x2\x2\x4\x2\x6\x2\b\x2\n\x2"+
+		"\f\x2\xE\x2\x10\x2\x12\x2\x14\x2\x16\x2\x18\x2\x1A\x2\x1C\x2\x1E\x2 \x2"+
+		"\"\x2$\x2&\x2(\x2*\x2,\x2.\x2\x30\x2\x2\x6\x3\x2\xF\x11\x3\x2\x12\x13"+
+		"\x3\x2\x14\x19\x3\x2\x1C \xE7\x2\x35\x3\x2\x2\x2\x4>\x3\x2\x2\x2\x6\x43"+
+		"\x3\x2\x2\x2\bG\x3\x2\x2\x2\nR\x3\x2\x2\x2\fT\x3\x2\x2\x2\xEZ\x3\x2\x2"+
+		"\x2\x10\x62\x3\x2\x2\x2\x12k\x3\x2\x2\x2\x14o\x3\x2\x2\x2\x16}\x3\x2\x2"+
+		"\x2\x18\x91\x3\x2\x2\x2\x1A\x9C\x3\x2\x2\x2\x1C\x9E\x3\x2\x2\x2\x1E\xA1"+
+		"\x3\x2\x2\x2 \xA4\x3\x2\x2\x2\"\xA7\x3\x2\x2\x2$\xAF\x3\x2\x2\x2&\xC1"+
+		"\x3\x2\x2\x2(\xD8\x3\x2\x2\x2*\xDA\x3\x2\x2\x2,\xDC\x3\x2\x2\x2.\xDE\x3"+
+		"\x2\x2\x2\x30\xE0\x3\x2\x2\x2\x32\x34\x5\x4\x3\x2\x33\x32\x3\x2\x2\x2"+
+		"\x34\x37\x3\x2\x2\x2\x35\x33\x3\x2\x2\x2\x35\x36\x3\x2\x2\x2\x36\x38\x3"+
+		"\x2\x2\x2\x37\x35\x3\x2\x2\x2\x38\x39\a\x2\x2\x3\x39\x3\x3\x2\x2\x2:?"+
+		"\x5\x6\x4\x2;?\x5\b\x5\x2<?\x5\f\a\x2=?\x5\xE\b\x2>:\x3\x2\x2\x2>;\x3"+
+		"\x2\x2\x2><\x3\x2\x2\x2>=\x3\x2\x2\x2?\x5\x3\x2\x2\x2@\x44\x5\x12\n\x2"+
+		"\x41\x44\x5\x14\v\x2\x42\x44\x5\"\x12\x2\x43@\x3\x2\x2\x2\x43\x41\x3\x2"+
+		"\x2\x2\x43\x42\x3\x2\x2\x2\x44\x45\x3\x2\x2\x2\x45\x46\a\x3\x2\x2\x46"+
+		"\a\x3\x2\x2\x2GH\a&\x2\x2HI\a\x4\x2\x2IJ\x5&\x14\x2JK\a\x5\x2\x2KN\x5"+
+		"\x10\t\x2LM\a\'\x2\x2MO\x5\n\x6\x2NL\x3\x2\x2\x2NO\x3\x2\x2\x2O\t\x3\x2"+
+		"\x2\x2PS\x5\x10\t\x2QS\x5\b\x5\x2RP\x3\x2\x2\x2RQ\x3\x2\x2\x2S\v\x3\x2"+
+		"\x2\x2TU\a%\x2\x2UV\a\x4\x2\x2VW\x5&\x14\x2WX\a\x5\x2\x2XY\x5\x10\t\x2"+
+		"Y\r\x3\x2\x2\x2Z[\a!\x2\x2[\\\a\x4\x2\x2\\]\x5\x12\n\x2]^\a\x3\x2\x2^"+
+		"_\x5&\x14\x2_`\a\x5\x2\x2`\x61\x5\x10\t\x2\x61\xF\x3\x2\x2\x2\x62\x66"+
+		"\a\x6\x2\x2\x63\x65\x5\x4\x3\x2\x64\x63\x3\x2\x2\x2\x65h\x3\x2\x2\x2\x66"+
+		"\x64\x3\x2\x2\x2\x66g\x3\x2\x2\x2gi\x3\x2\x2\x2h\x66\x3\x2\x2\x2ij\a\a"+
+		"\x2\x2j\x11\x3\x2\x2\x2kl\a,\x2\x2lm\a\b\x2\x2mn\x5&\x14\x2n\x13\x3\x2"+
+		"\x2\x2op\a,\x2\x2py\a\x4\x2\x2qv\x5&\x14\x2rs\a\t\x2\x2su\x5&\x14\x2t"+
+		"r\x3\x2\x2\x2ux\x3\x2\x2\x2vt\x3\x2\x2\x2vw\x3\x2\x2\x2wz\x3\x2\x2\x2"+
+		"xv\x3\x2\x2\x2yq\x3\x2\x2\x2yz\x3\x2\x2\x2z{\x3\x2\x2\x2{|\a\x5\x2\x2"+
+		"|\x15\x3\x2\x2\x2}~\a\n\x2\x2~\x83\x5&\x14\x2\x7F\x80\a\t\x2\x2\x80\x82"+
+		"\x5&\x14\x2\x81\x7F\x3\x2\x2\x2\x82\x85\x3\x2\x2\x2\x83\x81\x3\x2\x2\x2"+
+		"\x83\x84\x3\x2\x2\x2\x84\x86\x3\x2\x2\x2\x85\x83\x3\x2\x2\x2\x86\x87\a"+
+		"\v\x2\x2\x87\x17\x3\x2\x2\x2\x88\x89\a,\x2\x2\x89\x8A\a\n\x2\x2\x8A\x8B"+
+		"\a,\x2\x2\x8B\x92\a\v\x2\x2\x8C\x8D\a,\x2\x2\x8D\x8E\a\f\x2\x2\x8E\x8F"+
+		"\a\x4\x2\x2\x8F\x90\a,\x2\x2\x90\x92\a\x5\x2\x2\x91\x88\x3\x2\x2\x2\x91"+
+		"\x8C\x3\x2\x2\x2\x92\x19\x3\x2\x2\x2\x93\x94\a,\x2\x2\x94\x95\a\n\x2\x2"+
+		"\x95\x96\a\x1C\x2\x2\x96\x9D\a\v\x2\x2\x97\x98\a,\x2\x2\x98\x99\a\f\x2"+
+		"\x2\x99\x9A\a\x4\x2\x2\x9A\x9B\a\x1C\x2\x2\x9B\x9D\a\x5\x2\x2\x9C\x93"+
+		"\x3\x2\x2\x2\x9C\x97\x3\x2\x2\x2\x9D\x1B\x3\x2\x2\x2\x9E\x9F\a,\x2\x2"+
+		"\x9F\xA0\a\x1B\x2\x2\xA0\x1D\x3\x2\x2\x2\xA1\xA2\x5\x1A\xE\x2\xA2\xA3"+
+		"\a\x1B\x2\x2\xA3\x1F\x3\x2\x2\x2\xA4\xA5\x5\x18\r\x2\xA5\xA6\a\x1B\x2"+
+		"\x2\xA6!\x3\x2\x2\x2\xA7\xAC\a,\x2\x2\xA8\xA9\a\r\x2\x2\xA9\xAB\x5\x14"+
+		"\v\x2\xAA\xA8\x3\x2\x2\x2\xAB\xAE\x3\x2\x2\x2\xAC\xAA\x3\x2\x2\x2\xAC"+
+		"\xAD\x3\x2\x2\x2\xAD#\x3\x2\x2\x2\xAE\xAC\x3\x2\x2\x2\xAF\xB0\a\xE\x2"+
+		"\x2\xB0\xB1\x5&\x14\x2\xB1%\x3\x2\x2\x2\xB2\xB3\b\x14\x1\x2\xB3\xC2\x5"+
+		"\x30\x19\x2\xB4\xC2\a,\x2\x2\xB5\xC2\x5\x14\v\x2\xB6\xB7\a\x4\x2\x2\xB7"+
+		"\xB8\x5&\x14\x2\xB8\xB9\a\x5\x2\x2\xB9\xC2\x3\x2\x2\x2\xBA\xC2\x5$\x13"+
+		"\x2\xBB\xC2\x5\x16\f\x2\xBC\xC2\x5\x18\r\x2\xBD\xC2\x5\x1A\xE\x2\xBE\xC2"+
+		"\x5\x1C\xF\x2\xBF\xC2\x5\x1E\x10\x2\xC0\xC2\x5 \x11\x2\xC1\xB2\x3\x2\x2"+
+		"\x2\xC1\xB4\x3\x2\x2\x2\xC1\xB5\x3\x2\x2\x2\xC1\xB6\x3\x2\x2\x2\xC1\xBA"+
+		"\x3\x2\x2\x2\xC1\xBB\x3\x2\x2\x2\xC1\xBC\x3\x2\x2\x2\xC1\xBD\x3\x2\x2"+
+		"\x2\xC1\xBE\x3\x2\x2\x2\xC1\xBF\x3\x2\x2\x2\xC1\xC0\x3\x2\x2\x2\xC2\xD5"+
+		"\x3\x2\x2\x2\xC3\xC4\f\x6\x2\x2\xC4\xC5\x5(\x15\x2\xC5\xC6\x5&\x14\a\xC6"+
+		"\xD4\x3\x2\x2\x2\xC7\xC8\f\x5\x2\x2\xC8\xC9\x5*\x16\x2\xC9\xCA\x5&\x14"+
+		"\x6\xCA\xD4\x3\x2\x2\x2\xCB\xCC\f\x4\x2\x2\xCC\xCD\x5,\x17\x2\xCD\xCE"+
+		"\x5&\x14\x5\xCE\xD4\x3\x2\x2\x2\xCF\xD0\f\x3\x2\x2\xD0\xD1\x5.\x18\x2"+
+		"\xD1\xD2\x5&\x14\x4\xD2\xD4\x3\x2\x2\x2\xD3\xC3\x3\x2\x2\x2\xD3\xC7\x3"+
+		"\x2\x2\x2\xD3\xCB\x3\x2\x2\x2\xD3\xCF\x3\x2\x2\x2\xD4\xD7\x3\x2\x2\x2"+
+		"\xD5\xD3\x3\x2\x2\x2\xD5\xD6\x3\x2\x2\x2\xD6\'\x3\x2\x2\x2\xD7\xD5\x3"+
+		"\x2\x2\x2\xD8\xD9\t\x2\x2\x2\xD9)\x3\x2\x2\x2\xDA\xDB\t\x3\x2\x2\xDB+"+
+		"\x3\x2\x2\x2\xDC\xDD\t\x4\x2\x2\xDD-\x3\x2\x2\x2\xDE\xDF\a\x1A\x2\x2\xDF"+
+		"/\x3\x2\x2\x2\xE0\xE1\t\x5\x2\x2\xE1\x31\x3\x2\x2\x2\x11\x35>\x43NR\x66"+
+		"vy\x83\x91\x9C\xAC\xC1\xD3\xD5";
 	public static readonly ATN _ATN =
 		new ATNDeserializer().Deserialize(_serializedATN.ToCharArray());
 }

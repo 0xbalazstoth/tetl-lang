@@ -66,6 +66,28 @@ public class TetlVisitor : TetlBaseVisitor<object?>
         return func(args);
     }
 
+    public override object? VisitDotFields(TetlParser.DotFieldsContext context)
+    {
+        var varName = context.varName.Text;
+        var dotFunctionName = context.dotFunction.IDENTIFIER().GetText();
+        var dotFunctionParameters = context.dotFunction.expression().Select(Visit).ToArray();
+
+        switch (dotFunctionName)
+        {
+            case "Add":
+                ArrayAddItem(varName, dotFunctionParameters);
+                break;
+            case "Remove":
+                ArrayRemoveItem(varName, dotFunctionParameters);
+                break;
+            default:
+                throw new NotImplementedException();
+        }
+
+        return null;
+    }
+
+
     public override object? VisitAssignment(TetlParser.AssignmentContext context)
     {
         var varName = context.IDENTIFIER().GetText();
@@ -81,12 +103,88 @@ public class TetlVisitor : TetlBaseVisitor<object?>
     public override object? VisitArrayInit(TetlParser.ArrayInitContext context)
     {
         List<object?> values = new List<object?>();
-        foreach (TetlParser.ExpressionContext value in context.expression())
-        {
-            values.Add(Visit(value));
-        }
+        var startIndex = context.start.StartIndex;
+        var stopIndex = context.stop.StopIndex;
 
-        return values;
+        if ((stopIndex - startIndex) <= 1)
+        {
+            return values;
+        }
+        else
+        {
+            foreach (TetlParser.ExpressionContext value in context.expression())
+            {
+                values.Add(Visit(value));
+            }
+
+            return values;
+        }
+    }
+
+    private void ArrayAddItem(string varName, object?[] dotFunctionParameters)
+    {
+        if (Variables.ContainsKey(varName))
+        {
+            var variable = Variables.GetValueOrDefault(varName);
+
+            if (variable != null)
+            {
+                if (variable.GetType().IsGenericType && variable is IEnumerable)
+                {
+                    var elements = variable as List<object?>;
+                    elements?.Add(dotFunctionParameters[0]);
+                }
+                else
+                {
+                    throw new TetlFunctionNotAvailableForThisTypeException()
+                    {
+                        ErrorMessage = "You can't use Add function for this type!",
+                        Value = variable.GetType()
+                    };
+                }
+            }
+        }
+        else
+        {
+            throw new TetlVariableNotDefinedException()
+            {
+                ErrorMessage = $"Variable is not defined!",
+                Variable = $"variable: {varName}",
+            };
+        }
+    }
+    
+    private void ArrayRemoveItem(string varName, object?[] dotFunctionParameters)
+    {
+        if (Variables.ContainsKey(varName))
+        {
+            var variable = Variables.GetValueOrDefault(varName);
+
+            if (variable != null)
+            {
+                if (variable.GetType().IsGenericType && variable is IEnumerable)
+                {
+                    var elements = variable as List<object?>;
+                    elements?.Remove(dotFunctionParameters[0]);
+                }
+                else
+                {
+                    throw new TetlFunctionNotAvailableForThisTypeException()
+                    {
+                        ErrorMessage = "You can't use Remove function for this type!",
+                        Value = variable.GetType()
+                    };
+                }
+            }
+        }
+        else
+        {
+            throw new TetlVariableNotDefinedException()
+            {
+                ErrorMessage = $"Variable is not defined!",
+                Variable = $"variable: {varName}",
+            };
+        }
     }
 
     #endregion
@@ -272,7 +370,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
                 Variable = $"variable: {varName}",
             };
         }
-        
+
         throw new TetlValueCannotBeNullException()
         {
             ErrorMessage = "Value is null!",
@@ -349,6 +447,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
     public override object? VisitIdentifierExpression(TetlParser.IdentifierExpressionContext context)
     {
         var varName = context.IDENTIFIER().GetText();
+
         if (!Variables.ContainsKey(varName))
         {
             throw new TetlVariableNotDefinedException()
@@ -477,17 +576,6 @@ public class TetlVisitor : TetlBaseVisitor<object?>
 
     #region Conditions
 
-    // public override object? VisitIfBlock(TetlParser.IfBlockContext context)
-    // {
-    //     string conditionText = context.IF().GetText();
-    //     Func<object?, bool> condition = conditionText == "if" ? IsTrue : IsFalse;
-    //     if (condition(Visit(context.expression())))
-    //     {
-    //         Visit(context.block());
-    //     }
-    //
-    //     return null;
-    // }
     public override object? VisitIfElseBlock(TetlParser.IfElseBlockContext context)
     {
         string conditionIFText = context.IF().GetText();
@@ -502,7 +590,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
         {
             isElseBlockGiven = false;
         }
-        
+
         Func<object?, bool> condition = conditionIFText == "if" ? IsTrue : IsFalse;
         if (conditionIFText != null && isElseBlockGiven) // if, else if, else
         {

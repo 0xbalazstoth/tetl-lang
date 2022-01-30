@@ -1,19 +1,24 @@
 >> Array tests
 
-array = [1, 2, 3, 4, 5, 7+7];
-array2 = ["orange", "apple"];
-indexAt = 3;
-OutNewLine(array[5]);
-OutNewLine(array2[1]);
-OutNewLine(array[indexAt]);
-OutNewLine(array.At(2));
-OutNewLine(array.At(indexAt));
-OutNewLine("");
+array = [1, 2, 3];
+OutNewLine(array.Length());
+
+a = 5;
+array.Add(10-1);
+array.Add(a * 20);
+array.Add(20);
 
 i = 0;
-while (i < 6)
+while (i < array.Length())
 {
-    actual = array[i];
-    OutNewLine(actual + 2);
+    OutNewLine(array[i]);
+    i = i + 1;
+}
+
+array.Remove(9);
+i = 0;
+while (i < array.Length())
+{
+    OutNewLine(array[i]);
     i = i + 1;
 }
