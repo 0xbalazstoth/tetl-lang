@@ -300,17 +300,17 @@ public partial class TetlBaseListener : ITetlListener {
 	public virtual void ExitStatement([NotNull] TetlParser.StatementContext context) { }
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="TetlParser.ifBlock"/>.
+	/// Enter a parse tree produced by <see cref="TetlParser.ifElseBlock"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterIfBlock([NotNull] TetlParser.IfBlockContext context) { }
+	public virtual void EnterIfElseBlock([NotNull] TetlParser.IfElseBlockContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="TetlParser.ifBlock"/>.
+	/// Exit a parse tree produced by <see cref="TetlParser.ifElseBlock"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitIfBlock([NotNull] TetlParser.IfBlockContext context) { }
+	public virtual void ExitIfElseBlock([NotNull] TetlParser.IfElseBlockContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="TetlParser.elseIfBlock"/>.

@@ -174,11 +174,11 @@ public interface ITetlVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitStatement([NotNull] TetlParser.StatementContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="TetlParser.ifBlock"/>.
+	/// Visit a parse tree produced by <see cref="TetlParser.ifElseBlock"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitIfBlock([NotNull] TetlParser.IfBlockContext context);
+	Result VisitIfElseBlock([NotNull] TetlParser.IfElseBlockContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="TetlParser.elseIfBlock"/>.

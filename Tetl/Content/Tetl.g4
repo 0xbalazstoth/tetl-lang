@@ -2,14 +2,15 @@ grammar Tetl;
 
 // Lines
 program: line* EOF;
-line: statement | ifBlock | whileBlock | forBlock;
+line: statement | ifElseBlock | whileBlock | forBlock;
 
 // Statement
 statement: (assignment|functionCall) ';';
 
 // Blocks
-ifBlock: IF '(' expression ')' block (ELSE elseIfBlock)?;
-elseIfBlock: block | ifBlock;
+ifElseBlock: IF '(' expression ')' block (ELSE elseIfBlock)?;
+//ifBlock: IF '(' expression ')' block?;
+elseIfBlock: block | ifElseBlock;
 whileBlock: WHILE '(' expression ')' block;
 forBlock: FOR '(' assignment ';' expression ')' block;
 block: '{' line* '}';
@@ -24,9 +25,9 @@ functionCall: IDENTIFIER '(' (expression (',' expression)*)? ')';
 arrayInit: '[' expression (',' expression)* ']';
 indexVariable: varName=IDENTIFIER '[' at=IDENTIFIER ']' | varName=IDENTIFIER '.At' '(' at=IDENTIFIER ')';
 indexInteger: varName=IDENTIFIER '[' at=INTEGER ']' | varName=IDENTIFIER '.At' '(' at=INTEGER ')';
-variableLength: varName=IDENTIFIER '.Length()';
-variableAtLength: indexInteger '.Length()';
-variableAtIdentifierLength: indexVariable '.Length()';
+variableLength: varName=IDENTIFIER LENGTH;
+variableAtLength: indexInteger LENGTH;
+variableAtIdentifierLength: indexVariable LENGTH;
 
 // Negate
 nExpression: '!' expression;
@@ -59,6 +60,7 @@ BOOL_OPERATOR: '&&' | 'and' | '||' | 'or';
 
 // Constants
 constant: INTEGER | FLOAT | STRING | BOOL | NULL;
+LENGTH: '.Length()';
 INTEGER: [0-9]+;
 FLOAT: [0-9]+ '.' [0-9]+;
 STRING: ('"' ~'"'* '"') | ('\'' ~'\''* '\'');

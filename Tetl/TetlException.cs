@@ -51,4 +51,13 @@ namespace Tetl
     public class TetlValueCannotBeNullException : TetlBaseException
     {
     }
+
+    public class TetlIndexWasOutsideTheException : TetlBaseException
+    {
+        public string? Index { get; set; }
+    }
+
+    public class TetlIfElseConditionNullException : TetlBaseException
+    {
+    }
 }

@@ -4,7 +4,7 @@ using Antlr4.Runtime;
 using Tetl.Content;
 using Tetl;
 
-var fileName = @"C:\Users\rpgix\RiderProjects\Tetl\Tetl\Tests\test_variable_length.tetl";
+var fileName = @"C:\Users\rpgix\RiderProjects\Tetl\Tetl\Tests\test_custom.tetl";
 var fileContents = File.ReadAllText(fileName);
 var inputStream = new AntlrInputStream(fileContents);
 var tetlLexer = new TetlLexer(inputStream);
@@ -26,64 +26,66 @@ try
 }
 catch (TetlCannotCompareValuesException e)
 {
-    ProcessInformation($"[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
+    ProcessInformation($"\n[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
     ProcessInformation($"[INFO]: {e.Left}, {e.Right}", ConsoleColor.DarkYellow);
-    ProcessInformation($"[ERROR]: {e.ErrorMessage}", ConsoleColor.DarkRed);
+    ProcessInformation($"[ERROR]: {e.ErrorMessage}\n", ConsoleColor.DarkRed);
 }
 catch (TetlFunctionNotDefinedException e)
 {
-    ProcessInformation($"[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
+    ProcessInformation($"\n[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
     ProcessInformation($"[INFO]: {e.Function}", ConsoleColor.DarkYellow);
-    ProcessInformation($"[ERROR]: {e.ErrorMessage}", ConsoleColor.DarkRed);
+    ProcessInformation($"[ERROR]: {e.ErrorMessage}\n", ConsoleColor.DarkRed);
 }
 catch (TetlVariableNotDefinedException e)
 {
-    ProcessInformation($"[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
+    ProcessInformation($"\n[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
     ProcessInformation($"[INFO]: {e.Variable}", ConsoleColor.DarkYellow);
-    ProcessInformation($"[ERROR]: {e.ErrorMessage}", ConsoleColor.DarkRed);
+    ProcessInformation($"[ERROR]: {e.ErrorMessage}\n", ConsoleColor.DarkRed);
 }
 catch (TetlValueIsNotBooleanException e)
 {
-    ProcessInformation($"[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
+    ProcessInformation($"\n[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
     ProcessInformation($"[INFO]: {e.Variable}", ConsoleColor.DarkYellow);
-    ProcessInformation($"[ERROR]: {e.ErrorMessage}", ConsoleColor.DarkRed);
+    ProcessInformation($"[ERROR]: {e.ErrorMessage}\n", ConsoleColor.DarkRed);
 }
 catch (TetlInvalidAdditionException e)
 {
-    ProcessInformation($"[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
+    ProcessInformation($"\n[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
     ProcessInformation($"[INFO]: {e.Left}, {e.Right}", ConsoleColor.DarkYellow);
-    ProcessInformation($"[ERROR]: {e.ErrorMessage}", ConsoleColor.DarkRed);
+    ProcessInformation($"[ERROR]: {e.ErrorMessage}\n", ConsoleColor.DarkRed);
 }
 catch (TetlInvalidSubtractException e)
 {
-    ProcessInformation($"[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
+    ProcessInformation($"\n[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
     ProcessInformation($"[INFO]: {e.Left}, {e.Right}", ConsoleColor.DarkYellow);
-    ProcessInformation($"[ERROR]: {e.ErrorMessage}", ConsoleColor.DarkRed);
+    ProcessInformation($"[ERROR]: {e.ErrorMessage}\n", ConsoleColor.DarkRed);
 }
 catch (TetlInvalidMultiplicationException e)
 {
-    ProcessInformation($"[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
+    ProcessInformation($"\n[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
     ProcessInformation($"[INFO]: {e.Left}, {e.Right}", ConsoleColor.DarkYellow);
-    ProcessInformation($"[ERROR]: {e.ErrorMessage}", ConsoleColor.DarkRed);
+    ProcessInformation($"[ERROR]: {e.ErrorMessage}\n", ConsoleColor.DarkRed);
 }
 catch (TetlInvalidDivisionException e)
 {
-    ProcessInformation($"[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
+    ProcessInformation($"\n[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
     ProcessInformation($"[INFO]: {e.Left}, {e.Right}", ConsoleColor.DarkYellow);
-    ProcessInformation($"[ERROR]: {e.ErrorMessage}", ConsoleColor.DarkRed);
+    ProcessInformation($"[ERROR]: {e.ErrorMessage}\n", ConsoleColor.DarkRed);
 }
 catch (TetlInvalidModulusException e)
 {
-    ProcessInformation($"[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
+    ProcessInformation($"\n[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
     ProcessInformation($"[INFO]: {e.Left}, {e.Right}", ConsoleColor.DarkYellow);
-    ProcessInformation($"[ERROR]: {e.ErrorMessage}", ConsoleColor.DarkRed);
+    ProcessInformation($"[ERROR]: {e.ErrorMessage}\n", ConsoleColor.DarkRed);
 }
 catch (TetlValueCannotBeNullException e)
 {
-    ProcessInformation($"[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
-    ProcessInformation($"[ERROR]: {e.ErrorMessage}", ConsoleColor.DarkRed);
+    ProcessInformation($"\n[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
+    ProcessInformation($"[ERROR]: {e.ErrorMessage}\n", ConsoleColor.DarkRed);
 }
-catch (Exception e)
+catch (TetlIndexWasOutsideTheException e)
 {
-    Console.WriteLine(e.Message);
+    ProcessInformation($"\n[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
+    ProcessInformation($"[INFO]: {e.Index}", ConsoleColor.DarkYellow);
+    ProcessInformation($"[ERROR]: {e.ErrorMessage}\n", ConsoleColor.DarkRed);
 }

@@ -1,4 +1,17 @@
-if (true == false)
+>> Sorozatszámítás tételek
+array = [1, 2, 3, 4, 5, 6];
+i = 0;
+ertek = 0;
+n = array.Length();
+while (i < n)
 {
-    OutNewLine("asd");
+    if (array[i] % 2 == 0)
+    {
+        ertek = ertek + array[i];
+    }
+    
+    i = i + 1;
 }
+
+OutNewLine(ertek);
+OutNewLine("");

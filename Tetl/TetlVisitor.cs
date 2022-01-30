@@ -75,8 +75,9 @@ public class TetlVisitor : TetlBaseVisitor<object?>
 
         return null;
     }
-    
+
     #region Array
+
     public override object? VisitArrayInit(TetlParser.ArrayInitContext context)
     {
         List<object?> values = new List<object?>();
@@ -87,42 +88,48 @@ public class TetlVisitor : TetlBaseVisitor<object?>
 
         return values;
     }
+
     #endregion
-    
+
     #region Variable length
 
     public override object? VisitVariableLength(TetlParser.VariableLengthContext context)
     {
         var varName = context.varName.Text;
 
-        if (Variables[varName] != null)
+        if (Variables.ContainsKey(varName))
         {
-            if (Variables.ContainsKey(varName))
-            {
-                var variable = Variables.GetValueOrDefault(varName);
+            var variable = Variables.GetValueOrDefault(varName);
 
-                if (variable != null)
+            if (variable != null)
+            {
+                if (variable.GetType().IsGenericType && variable is IEnumerable)
                 {
-                    if (variable.GetType().IsGenericType && variable is IEnumerable)
+                    var elements = variable as List<object?>;
+                    if (elements != null)
                     {
-                        var elements = variable as List<object?>;
-                        if (elements != null)
-                        {
-                            return elements.Count;
-                        }
+                        return elements.Count;
                     }
-                    else if (variable is string)
+                }
+                else if (variable is string)
+                {
+                    var str = variable as string;
+                    if (str != null)
                     {
-                        var str = variable as string;
-                        if (str != null)
-                        {
-                            return str.Length;
-                        }
+                        return str.Length;
                     }
                 }
             }
         }
-        
+        else
+        {
+            throw new TetlVariableNotDefinedException()
+            {
+                ErrorMessage = $"Variable is not defined!",
+                Variable = $"variable: {varName}",
+            };
+        }
+
         throw new TetlValueCannotBeNullException()
         {
             ErrorMessage = "Value is null!",
@@ -133,27 +140,32 @@ public class TetlVisitor : TetlBaseVisitor<object?>
     {
         var varName = context.indexInteger().varName.Text;
         var index = Convert.ToInt32(context.indexInteger().at.Text);
-        
-        if (Variables[varName] != null)
+
+        if (Variables.ContainsKey(varName))
         {
-            if (Variables.ContainsKey(varName))
+            var variable = Variables.GetValueOrDefault(varName);
+
+            if (variable != null)
             {
-                var variable = Variables.GetValueOrDefault(varName);
-        
-                if (variable != null)
+                if (variable.GetType().IsGenericType && variable is IEnumerable)
                 {
-                    if (variable.GetType().IsGenericType && variable is IEnumerable)
+                    var elements = variable as List<object?>;
+                    if (elements != null)
                     {
-                        var elements = variable as List<object?>;
-                        if (elements != null)
-                        {
-                            return elements[index]?.ToString()!.Length;
-                        }
+                        return elements[index]?.ToString()!.Length;
                     }
                 }
             }
         }
-        
+        else
+        {
+            throw new TetlVariableNotDefinedException()
+            {
+                ErrorMessage = $"Variable is not defined!",
+                Variable = $"variable: {varName}",
+            };
+        }
+
         throw new TetlValueCannotBeNullException()
         {
             ErrorMessage = "Value is null!",
@@ -166,26 +178,31 @@ public class TetlVisitor : TetlBaseVisitor<object?>
         var indexVariableName = context.indexVariable().at.Text;
         var indexVariableValue = Convert.ToInt32(Variables.GetValueOrDefault(indexVariableName));
 
-        if (Variables[varName] != null)
+        if (Variables.ContainsKey(varName))
         {
-            if (Variables.ContainsKey(varName))
+            var variable = Variables.GetValueOrDefault(varName);
+
+            if (variable != null)
             {
-                var variable = Variables.GetValueOrDefault(varName);
-        
-                if (variable != null)
+                if (variable.GetType().IsGenericType && variable is IEnumerable)
                 {
-                    if (variable.GetType().IsGenericType && variable is IEnumerable)
+                    var elements = variable as List<object?>;
+                    if (elements != null)
                     {
-                        var elements = variable as List<object?>;
-                        if (elements != null)
-                        {
-                            return elements[indexVariableValue]?.ToString()!.Length;
-                        }
+                        return elements[indexVariableValue]?.ToString()!.Length;
                     }
                 }
             }
         }
-        
+        else
+        {
+            throw new TetlVariableNotDefinedException()
+            {
+                ErrorMessage = $"Variable is not defined!",
+                Variable = $"variable: {varName}",
+            };
+        }
+
         throw new TetlValueCannotBeNullException()
         {
             ErrorMessage = "Value is null!",
@@ -195,46 +212,138 @@ public class TetlVisitor : TetlBaseVisitor<object?>
     #endregion
 
     #region Indexing
+
     public override object? VisitIndexVariable(TetlParser.IndexVariableContext context)
     {
         var varName = context.varName.Text;
         var indexVariableName = context.at.Text;
         var indexVariableValue = Convert.ToInt32(Variables.GetValueOrDefault(indexVariableName));
-        object? value = null;
-        
-        if (Variables[varName] != null)
+
+        if (Variables.ContainsKey(varName))
         {
-            if (Variables.ContainsKey(varName))
+            var variable = Variables.GetValueOrDefault(varName);
+
+            if (variable != null)
             {
-                var array = Variables.GetValueOrDefault(varName);
-                var elements = array as List<object?>;
-                var element = elements?[indexVariableValue];
-                value = element;
+                if (variable.GetType().IsGenericType && variable is IEnumerable)
+                {
+                    var elements = variable as List<object?>;
+
+                    if (indexVariableValue < elements?.Count)
+                    {
+                        var element = elements?[indexVariableValue];
+                        return element;
+                    }
+                    else
+                    {
+                        throw new TetlIndexWasOutsideTheException()
+                        {
+                            ErrorMessage = "Index was outside the bound!",
+                            Index = $"index: {indexVariableValue}"
+                        };
+                    }
+                }
+                else if (variable is string)
+                {
+                    var str = variable as string;
+                    if (str != null)
+                    {
+                        if (indexVariableValue < str.Length)
+                        {
+                            return str[indexVariableValue];
+                        }
+                        else
+                        {
+                            throw new TetlIndexWasOutsideTheException()
+                            {
+                                ErrorMessage = "Index was outside the bound!",
+                                Index = $"index: {indexVariableValue}"
+                            };
+                        }
+                    }
+                }
             }
         }
-
-        return value;
+        else
+        {
+            throw new TetlVariableNotDefinedException()
+            {
+                ErrorMessage = $"Variable is not defined!",
+                Variable = $"variable: {varName}",
+            };
+        }
+        
+        throw new TetlValueCannotBeNullException()
+        {
+            ErrorMessage = "Value is null!",
+        };
     }
 
     public override object? VisitIndexInteger(TetlParser.IndexIntegerContext context)
     {
         var varName = context.varName.Text;
         int indexINTEGER = Convert.ToInt32(context.INTEGER().GetText());
-        object? value = null;
-        
-        if (Variables[varName] != null)
+
+        if (Variables.ContainsKey(varName))
         {
-            if (Variables.ContainsKey(varName))
+            var variable = Variables.GetValueOrDefault(varName);
+
+            if (variable != null)
             {
-                var array = Variables.GetValueOrDefault(varName);
-                var elements = array as List<object?>;
-                var element = elements?[indexINTEGER];
-                value = element;
+                if (variable.GetType().IsGenericType && variable is IEnumerable)
+                {
+                    var elements = variable as List<object?>;
+
+                    if (indexINTEGER < elements?.Count)
+                    {
+                        var element = elements?[indexINTEGER];
+                        return element;
+                    }
+                    else
+                    {
+                        throw new TetlIndexWasOutsideTheException()
+                        {
+                            ErrorMessage = "Index was outside the bound!",
+                            Index = $"index: {indexINTEGER}"
+                        };
+                    }
+                }
+                else if (variable is string)
+                {
+                    var str = variable as string;
+                    if (str != null)
+                    {
+                        if (indexINTEGER < str.Length)
+                        {
+                            return str[indexINTEGER];
+                        }
+                        else
+                        {
+                            throw new TetlIndexWasOutsideTheException()
+                            {
+                                ErrorMessage = "Index was outside the bound!",
+                                Index = $"index: {indexINTEGER}"
+                            };
+                        }
+                    }
+                }
             }
         }
+        else
+        {
+            throw new TetlVariableNotDefinedException()
+            {
+                ErrorMessage = $"Variable is not defined!",
+                Variable = $"variable: {varName}",
+            };
+        }
 
-        return value;
+        throw new TetlValueCannotBeNullException()
+        {
+            ErrorMessage = "Value is null!",
+        };
     }
+
     #endregion
 
     public override object? VisitIdentifierExpression(TetlParser.IdentifierExpressionContext context)
@@ -290,7 +399,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
         var op = context.addOp().GetText();
 
         var additiveExpressions = new AdditiveExpressions();
-        
+
         return op switch
         {
             "+" => additiveExpressions.Add(left, right),
@@ -307,7 +416,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
         var op = context.multOp().GetText();
 
         var multiplicativeExpressions = new MultiplicativeExpressions();
-        
+
         return op switch
         {
             "*" => multiplicativeExpressions.Multiplication(left, right),
@@ -318,6 +427,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
     }
 
     #region While loop
+
     public override object? VisitWhileBlock(TetlParser.WhileBlockContext context)
     {
         Func<object?, bool> condition = context.WHILE().GetText() == "while" ? IsTrue : IsFalse;
@@ -336,9 +446,11 @@ public class TetlVisitor : TetlBaseVisitor<object?>
 
         return null;
     }
+
     #endregion
 
     #region For loop
+
     public override object? VisitForBlock(TetlParser.ForBlockContext context)
     {
         Func<object?, bool> condition = context.FOR().GetText() == "for" ? IsTrue : IsFalse;
@@ -360,35 +472,74 @@ public class TetlVisitor : TetlBaseVisitor<object?>
 
         return null;
     }
+
     #endregion
 
     #region Conditions
-    public override object? VisitIfBlock(TetlParser.IfBlockContext context)
+
+    // public override object? VisitIfBlock(TetlParser.IfBlockContext context)
+    // {
+    //     string conditionText = context.IF().GetText();
+    //     Func<object?, bool> condition = conditionText == "if" ? IsTrue : IsFalse;
+    //     if (condition(Visit(context.expression())))
+    //     {
+    //         Visit(context.block());
+    //     }
+    //
+    //     return null;
+    // }
+    public override object? VisitIfElseBlock(TetlParser.IfElseBlockContext context)
     {
-        string conditionText = context.IF().GetText();
-        Func<object?, bool> condition = conditionText == "if" ? IsTrue : IsFalse;
-        if (condition(Visit(context.expression())))
+        string conditionIFText = context.IF().GetText();
+        bool isElseBlockGiven = false;
+
+        try
         {
-            Visit(context.block());
+            string conditionELSEText = context.ELSE().GetText();
+            isElseBlockGiven = true;
         }
-        else
+        catch (NullReferenceException)
         {
-            Visit(context.elseIfBlock());
+            isElseBlockGiven = false;
         }
         
+        Func<object?, bool> condition = conditionIFText == "if" ? IsTrue : IsFalse;
+        if (conditionIFText != null && isElseBlockGiven) // if, else if, else
+        {
+            if (condition(Visit(context.expression())))
+            {
+                Visit(context.block());
+            }
+            else
+            {
+                Visit(context.elseIfBlock());
+            }
+        }
+        else if (conditionIFText != null && !isElseBlockGiven) // if
+        {
+            if (condition(Visit(context.expression())))
+            {
+                Visit(context.block());
+            }
+        }
+
         return null;
     }
+
     #endregion
 
     #region Negate
+
     public override object? VisitNotExpression(TetlParser.NotExpressionContext context)
     {
         object? value = Visit(context.nExpression());
         return !(value as bool?);
     }
+
     #endregion
 
     #region Boolean and, or
+
     public override object? VisitBooleanExpression(TetlParser.BooleanExpressionContext context)
     {
         var left = Visit(context.expression(0));
@@ -396,7 +547,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
         var op = context.boolOp().GetText();
 
         var booleanExpressions = new BooleanExpressions();
-        
+
         return op switch
         {
             "and" => booleanExpressions.AndOperator(left, right),
@@ -406,6 +557,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
             _ => throw new NotImplementedException()
         };
     }
+
     #endregion
 
     public override object? VisitComparisonExpression(TetlParser.ComparisonExpressionContext context)

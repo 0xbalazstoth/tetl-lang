@@ -260,15 +260,15 @@ public interface ITetlListener : IParseTreeListener {
 	void ExitStatement([NotNull] TetlParser.StatementContext context);
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="TetlParser.ifBlock"/>.
+	/// Enter a parse tree produced by <see cref="TetlParser.ifElseBlock"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterIfBlock([NotNull] TetlParser.IfBlockContext context);
+	void EnterIfElseBlock([NotNull] TetlParser.IfElseBlockContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="TetlParser.ifBlock"/>.
+	/// Exit a parse tree produced by <see cref="TetlParser.ifElseBlock"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitIfBlock([NotNull] TetlParser.IfBlockContext context);
+	void ExitIfElseBlock([NotNull] TetlParser.IfElseBlockContext context);
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="TetlParser.elseIfBlock"/>.

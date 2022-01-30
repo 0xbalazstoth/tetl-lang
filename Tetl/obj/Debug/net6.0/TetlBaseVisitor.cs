@@ -248,7 +248,7 @@ public partial class TetlBaseVisitor<Result> : AbstractParseTreeVisitor<Result>,
 	public virtual Result VisitStatement([NotNull] TetlParser.StatementContext context) { return VisitChildren(context); }
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="TetlParser.ifBlock"/>.
+	/// Visit a parse tree produced by <see cref="TetlParser.ifElseBlock"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -256,7 +256,7 @@ public partial class TetlBaseVisitor<Result> : AbstractParseTreeVisitor<Result>,
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitIfBlock([NotNull] TetlParser.IfBlockContext context) { return VisitChildren(context); }
+	public virtual Result VisitIfElseBlock([NotNull] TetlParser.IfElseBlockContext context) { return VisitChildren(context); }
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="TetlParser.elseIfBlock"/>.
