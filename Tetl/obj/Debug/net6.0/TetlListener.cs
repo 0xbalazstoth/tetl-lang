@@ -438,6 +438,17 @@ public interface ITetlListener : IParseTreeListener {
 	void ExitVariableAtIdentifierLength([NotNull] TetlParser.VariableAtIdentifierLengthContext context);
 
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="TetlParser.atUpdateValue"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAtUpdateValue([NotNull] TetlParser.AtUpdateValueContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="TetlParser.atUpdateValue"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAtUpdateValue([NotNull] TetlParser.AtUpdateValueContext context);
+
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="TetlParser.dotFields"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

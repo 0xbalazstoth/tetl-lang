@@ -287,6 +287,13 @@ public interface ITetlVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitVariableAtIdentifierLength([NotNull] TetlParser.VariableAtIdentifierLengthContext context);
 
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="TetlParser.atUpdateValue"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAtUpdateValue([NotNull] TetlParser.AtUpdateValueContext context);
+
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="TetlParser.dotFields"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

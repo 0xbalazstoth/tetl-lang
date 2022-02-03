@@ -5,7 +5,7 @@ program: line* EOF;
 line: statement | ifElseBlock | whileBlock | forBlock | forEachBlock;
 
 // Statement
-statement: (assignment|functionCall|dotFields) ';';
+statement: (assignment|functionCall|dotFields|atUpdateValue) ';';
 
 // Blocks
 ifElseBlock: IF '(' expression ')' block (ELSE elseIfBlock)?;
@@ -29,6 +29,7 @@ indexExpression: varName=IDENTIFIER '[' at=expression ']';
 variableLength: varName=IDENTIFIER LENGTH;
 variableAtLength: indexInteger LENGTH;
 variableAtIdentifierLength: indexVariable LENGTH;
+atUpdateValue: varName=IDENTIFIER '[' at=expression ']' '=' value=expression;
 dotFields: varName=IDENTIFIER ('.' dotFunction=functionCall)*;
 
 // Negate

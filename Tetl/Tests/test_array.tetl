@@ -1,6 +1,20 @@
 >> Array tests
 
-array = [43, 2, 3];
+>> Update
+OutNewLine(">> Update");
+
+array = ['a', 'b', 'c'];
+update = true;
+array[2 - 1 + 1] = 1 + 5 * 3 % 2;
+array[0] = update;
+foreach (elem in array)
+{
+    currentElement = elem;
+    OutNewLine(currentElement);
+}
+
+>> Add
+OutNewLine(">> Add");
 
 a = 5;
 array.Add(a * -10);
@@ -11,6 +25,9 @@ while (i < array.Length())
     OutNewLine(array[i]);
     i = i + 1;
 }
+
+>> Remove
+OutNewLine(">> Remove");
 
 array.Remove(-50);
 i = 0;

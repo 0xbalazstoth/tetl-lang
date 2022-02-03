@@ -309,6 +309,58 @@ public class TetlVisitor : TetlBaseVisitor<object?>
 
     #endregion
 
+    #region Update value at index
+
+    public override object? VisitAtUpdateValue(TetlParser.AtUpdateValueContext context)
+    {
+        var varName = context.varName.Text;
+        var parameter = Visit(context.at);
+
+        if (parameter != null)
+        {
+            if (Variables.ContainsKey(varName))
+            {
+                int index = Convert.ToInt32(parameter);
+                var variable = Variables.GetValueOrDefault(varName);
+
+                if (variable != null)
+                {
+                    if (variable.GetType().IsGenericType && variable is IEnumerable)
+                    {
+                        var elements = variable as List<object?>;
+            
+                        if (index < elements?.Count)
+                        {
+                            var value = Visit(context.value);
+                            elements[index] = value;
+                        }
+                        else
+                        {
+                            throw new TetlIndexOutOfRangeException()
+                            {
+                                ErrorMessage = "Index was outside the bound!",
+                                Index = $"index: {index}"
+                            };
+                        }
+                    }
+                }
+
+            }
+        }
+        else
+        {
+            throw new TetlVariableNotDefinedException()
+            {
+                ErrorMessage = $"Variable is not defined!",
+                Variable = $"variable: {varName}",
+            };
+        }
+
+        return null;
+    }
+
+    #endregion
+    
     #region Indexing
 
     public override object? VisitIndexExpression(TetlParser.IndexExpressionContext context)
@@ -518,6 +570,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
 
     #endregion
 
+    #region Identifiers
     public override object? VisitIdentifierExpression(TetlParser.IdentifierExpressionContext context)
     {
         var varName = context.IDENTIFIER().GetText();
@@ -533,7 +586,9 @@ public class TetlVisitor : TetlBaseVisitor<object?>
 
         return Variables[varName];
     }
+    #endregion
 
+    #region Constants
     public override object? VisitConstant(TetlParser.ConstantContext context)
     {
         if (context.INTEGER() is { } i)
@@ -582,7 +637,9 @@ public class TetlVisitor : TetlBaseVisitor<object?>
 
         return new NotImplementedException();
     }
+    #endregion
 
+    #region Arithmetic operators
     public override object? VisitAdditiveExpression(TetlParser.AdditiveExpressionContext context)
     {
         var left = Visit(context.expression(0));
@@ -617,6 +674,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
             _ => throw new NotImplementedException("Invalid operation!")
         };
     }
+    #endregion
 
     #region While loop
 
@@ -764,6 +822,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
 
     #endregion
 
+    #region Comparison
     public override object? VisitComparisonExpression(TetlParser.ComparisonExpressionContext context)
     {
         var left = Visit(context.expression(0));
@@ -784,6 +843,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
             _ => throw new NotImplementedException()
         };
     }
+    #endregion
 
     private bool IsTrue(object? value)
     {

@@ -7,7 +7,7 @@
 - [x] Iteration
 - [x] Add element: `Add(0)`
 - [x] Delete element `Delete(2)`
-- [ ] Update element
+- [x] Update element `array[0] = 32`
 - [ ] Sort elements
 - [ ] Reverse elements
 
