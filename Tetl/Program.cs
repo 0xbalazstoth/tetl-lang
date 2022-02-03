@@ -4,7 +4,7 @@ using Antlr4.Runtime;
 using Tetl.Content;
 using Tetl;
 
-var fileName = @"C:\Users\rpgix\RiderProjects\Tetl\Tetl\Tests\test_array.tetl";
+var fileName = @"C:\Users\rpgix\RiderProjects\Tetl\Tetl\Tests\test_foreach.tetl";
 var fileContents = File.ReadAllText(fileName);
 var inputStream = new AntlrInputStream(fileContents);
 var tetlLexer = new TetlLexer(inputStream);
@@ -83,13 +83,19 @@ catch (TetlValueCannotBeNullException e)
     ProcessInformation($"\n[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
     ProcessInformation($"[ERROR]: {e.ErrorMessage}\n", ConsoleColor.DarkRed);
 }
-catch (TetlIndexWasOutsideTheException e)
+catch (TetlIndexOutOfRangeException e)
 {
     ProcessInformation($"\n[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
     ProcessInformation($"[INFO]: {e.Index}", ConsoleColor.DarkYellow);
     ProcessInformation($"[ERROR]: {e.ErrorMessage}\n", ConsoleColor.DarkRed);
 }
 catch (TetlFunctionNotAvailableForThisTypeException e)
+{
+    ProcessInformation($"\n[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
+    ProcessInformation($"[INFO]: {e.Value}", ConsoleColor.DarkYellow);
+    ProcessInformation($"[ERROR]: {e.ErrorMessage}\n", ConsoleColor.DarkRed);
+}
+catch (TetlInvalidCharacterDeclarationException e)
 {
     ProcessInformation($"\n[EXCEPTION]: {e.GetType().Name}", ConsoleColor.Yellow);
     ProcessInformation($"[INFO]: {e.Value}", ConsoleColor.DarkYellow);

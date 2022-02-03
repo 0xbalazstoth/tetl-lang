@@ -1,12 +1,9 @@
 >> Array tests
 
-array = [1, 2, 3];
-OutNewLine(array.Length());
+array = [43, 2, 3];
 
 a = 5;
-array.Add(10-1);
-array.Add(a * 20);
-array.Add(20);
+array.Add(a * -10);
 
 i = 0;
 while (i < array.Length())
@@ -15,7 +12,7 @@ while (i < array.Length())
     i = i + 1;
 }
 
-array.Remove(9);
+array.Remove(-50);
 i = 0;
 while (i < array.Length())
 {

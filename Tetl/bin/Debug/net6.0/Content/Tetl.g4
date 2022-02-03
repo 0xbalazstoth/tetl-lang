@@ -2,7 +2,7 @@ grammar Tetl;
 
 // Lines
 program: line* EOF;
-line: statement | ifElseBlock | whileBlock | forBlock;
+line: statement | ifElseBlock | whileBlock | forBlock | forEachBlock;
 
 // Statement
 statement: (assignment|functionCall|dotFields) ';';
@@ -12,6 +12,7 @@ ifElseBlock: IF '(' expression ')' block (ELSE elseIfBlock)?;
 elseIfBlock: block | ifElseBlock;
 whileBlock: WHILE '(' expression ')' block;
 forBlock: FOR '(' assignment ';' expression ')' block;
+forEachBlock: FOREACH '(' varName=IDENTIFIER 'in' expression ')' block;
 block: '{' line* '}';
 
 // Assignment
@@ -24,6 +25,7 @@ functionCall: IDENTIFIER '(' (expression (',' expression)*)? ')';
 arrayInit: '[' expression (',' expression)* ']';
 indexVariable: varName=IDENTIFIER '[' at=IDENTIFIER ']' | varName=IDENTIFIER '.At' '(' at=IDENTIFIER ')';
 indexInteger: varName=IDENTIFIER '[' at=INTEGER ']' | varName=IDENTIFIER '.At' '(' at=INTEGER ')';
+indexExpression: varName=IDENTIFIER '[' at=expression ']';
 variableLength: varName=IDENTIFIER LENGTH;
 variableAtLength: indexInteger LENGTH;
 variableAtIdentifierLength: indexVariable LENGTH;
@@ -42,6 +44,7 @@ expression
 	| arrayInit                             #arrayExpression
 	| indexVariable                         #indexVariableExpression
 	| indexInteger                          #indexIntegerExpression
+	| indexExpression                       #indexExpressionExpression
 	| variableLength                        #variableLengthExpression
 	| variableAtLength                      #variableAtLengthExpression
 	| variableAtIdentifierLength            #variableAtIdentifierLengthExpression
@@ -59,13 +62,15 @@ boolOp: BOOL_OPERATOR;
 BOOL_OPERATOR: '&&' | 'and' | '||' | 'or';
 
 // Constants
-constant: INTEGER | FLOAT | STRING | BOOL | NULL;
+constant: INTEGER | FLOAT | STRING | CHAR | BOOL | NULL | BYTE;
 LENGTH: '.Length()';
-INTEGER: [0-9]+;
-FLOAT: [0-9]+ '.' [0-9]+;
-STRING: ('"' ~'"'* '"') | ('\'' ~'\''* '\'');
+INTEGER: '-'?[0-9]+;
+FLOAT: '-'?[0-9]+ '.' [0-9]+;
+STRING: ('"' ~'"'* '"');
+CHAR: ('\'' ~'\''* '\'');
 BOOL: 'true' | 'false';
 NULL: 'null';
+BYTE: ([01]?[0-9]?[0-9]|'2'[0-4][0-9]|'25'[0-5]);
 FOR: 'for';
 IN: 'in';
 FOREACH: 'foreach';

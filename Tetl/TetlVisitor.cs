@@ -311,6 +311,80 @@ public class TetlVisitor : TetlBaseVisitor<object?>
 
     #region Indexing
 
+    public override object? VisitIndexExpression(TetlParser.IndexExpressionContext context)
+    {
+        var varName = context.varName.Text;
+        var parameter = Visit(context.at);
+
+        if (parameter != null)
+        {
+            if (Variables.ContainsKey(varName))
+            {
+                int index = Convert.ToInt32(parameter);
+                
+                var variable = Variables.GetValueOrDefault(varName);
+            
+                if (variable != null)
+                {
+                    if (variable.GetType().IsGenericType && variable is IEnumerable)
+                    {
+                        var elements = variable as List<object?>;
+            
+                        if (index < elements?.Count)
+                        {
+                            var element = elements?[index];
+                            return element;
+                        }
+                        else
+                        {
+                            throw new TetlIndexOutOfRangeException()
+                            {
+                                ErrorMessage = "Index was outside the bound!",
+                                Index = $"index: {index}"
+                            };
+                        }
+                    }
+                    else if (variable is string)
+                    {
+                        var str = variable as string;
+                        if (str != null)
+                        {
+                            if (index < str.Length)
+                            {
+                                return str[index];
+                            }
+                            else
+                            {
+                                throw new TetlIndexOutOfRangeException()
+                                {
+                                    ErrorMessage = "Index was outside the bound!",
+                                    Index = $"index: {index}"
+                                };
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                throw new TetlVariableNotDefinedException()
+                {
+                    ErrorMessage = $"Variable is not defined!",
+                    Variable = $"variable: {varName}",
+                };
+            }
+        }
+        else
+        {
+            throw new ArgumentException("Invalid index value given!");
+        }
+
+        throw new TetlValueCannotBeNullException()
+        {
+            ErrorMessage = "Value is null!",
+        };
+    }
+
     public override object? VisitIndexVariable(TetlParser.IndexVariableContext context)
     {
         var varName = context.varName.Text;
@@ -334,7 +408,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
                     }
                     else
                     {
-                        throw new TetlIndexWasOutsideTheException()
+                        throw new TetlIndexOutOfRangeException()
                         {
                             ErrorMessage = "Index was outside the bound!",
                             Index = $"index: {indexVariableValue}"
@@ -352,7 +426,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
                         }
                         else
                         {
-                            throw new TetlIndexWasOutsideTheException()
+                            throw new TetlIndexOutOfRangeException()
                             {
                                 ErrorMessage = "Index was outside the bound!",
                                 Index = $"index: {indexVariableValue}"
@@ -399,7 +473,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
                     }
                     else
                     {
-                        throw new TetlIndexWasOutsideTheException()
+                        throw new TetlIndexOutOfRangeException()
                         {
                             ErrorMessage = "Index was outside the bound!",
                             Index = $"index: {indexINTEGER}"
@@ -417,7 +491,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
                         }
                         else
                         {
-                            throw new TetlIndexWasOutsideTheException()
+                            throw new TetlIndexOutOfRangeException()
                             {
                                 ErrorMessage = "Index was outside the bound!",
                                 Index = $"index: {indexINTEGER}"
@@ -464,7 +538,7 @@ public class TetlVisitor : TetlBaseVisitor<object?>
     {
         if (context.INTEGER() is { } i)
         {
-            return int.Parse(i.GetText());
+            return int.Parse(i.GetText(), CultureInfo.InvariantCulture);
         }
 
         if (context.FLOAT() is { } f)
@@ -475,6 +549,25 @@ public class TetlVisitor : TetlBaseVisitor<object?>
         if (context.STRING() is { } s)
         {
             return s.GetText()[1..^1];
+        }
+
+        if (context.CHAR() is { } c)
+        {
+            var startIndex = context.start.StartIndex;
+            var stopIndex = context.stop.StopIndex;
+
+            if ((stopIndex - startIndex) == 2)
+            {
+                return c.GetText()[1..^1];
+            }
+            else
+            {
+                throw new TetlInvalidCharacterDeclarationException()
+                {
+                    ErrorMessage = "Invalid character declaration!",
+                    Value = "Too many characters!"
+                };
+            }            
         }
 
         if (context.BOOL() is { } b)
@@ -567,6 +660,29 @@ public class TetlVisitor : TetlBaseVisitor<object?>
         else
         {
             Visit(context.block());
+        }
+
+        return null;
+    }
+
+    #endregion
+    
+    #region Foreach loop
+
+    public override object? VisitForEachBlock(TetlParser.ForEachBlockContext context)
+    {
+        Func<object?, bool> condition = context.FOREACH().GetText() == "foreach" ? IsTrue : IsFalse;
+        var expression = Visit(context.expression());
+        var collection = expression as List<object?>;
+        Variables[context.varName.Text] = null;
+
+        if (collection != null)
+        {
+            foreach (var element in collection)
+            {
+                Variables[context.varName.Text] = element;
+                Visit(context.block());
+            }
         }
 
         return null;

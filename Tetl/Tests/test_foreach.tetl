@@ -1,0 +1,11 @@
+>> Foreach tests
+array = [];
+array.Add(55);
+array.Add(55);
+array.Add(55);
+array.Add(55);
+
+foreach (elem in array)
+{
+    OutNewLine(elem);
+}

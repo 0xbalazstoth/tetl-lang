@@ -129,6 +129,14 @@ public interface ITetlVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitParenthesizedExpression([NotNull] TetlParser.ParenthesizedExpressionContext context);
 
 	/// <summary>
+	/// Visit a parse tree produced by the <c>indexExpressionExpression</c>
+	/// labeled alternative in <see cref="TetlParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitIndexExpressionExpression([NotNull] TetlParser.IndexExpressionExpressionContext context);
+
+	/// <summary>
 	/// Visit a parse tree produced by the <c>functionCallExpression</c>
 	/// labeled alternative in <see cref="TetlParser.expression"/>.
 	/// </summary>
@@ -202,6 +210,13 @@ public interface ITetlVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitForBlock([NotNull] TetlParser.ForBlockContext context);
 
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="TetlParser.forEachBlock"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitForEachBlock([NotNull] TetlParser.ForEachBlockContext context);
+
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="TetlParser.block"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -242,6 +257,13 @@ public interface ITetlVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitIndexInteger([NotNull] TetlParser.IndexIntegerContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="TetlParser.indexExpression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitIndexExpression([NotNull] TetlParser.IndexExpressionContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="TetlParser.variableLength"/>.

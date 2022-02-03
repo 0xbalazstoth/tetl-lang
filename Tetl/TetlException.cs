@@ -52,16 +52,16 @@ namespace Tetl
     {
     }
 
-    public class TetlIndexWasOutsideTheException : TetlBaseException
+    public class TetlIndexOutOfRangeException : TetlBaseException
     {
         public string? Index { get; set; }
     }
 
-    public class TetlIfElseConditionNullException : TetlBaseException
+    public class TetlFunctionNotAvailableForThisTypeException : TetlBaseException
     {
     }
 
-    public class TetlFunctionNotAvailableForThisTypeException : TetlBaseException
+    public class TetlInvalidCharacterDeclarationException : TetlBaseException
     {
     }
 }
