@@ -80,13 +80,15 @@ public class TetlVisitor : TetlBaseVisitor<object?>
             case "Remove":
                 ArrayRemoveItem(varName, dotFunctionParameters);
                 break;
+            case "Reverse":
+                ArrayReverse(varName);
+                break;
             default:
                 throw new NotImplementedException();
         }
 
         return null;
     }
-
 
     public override object? VisitAssignment(TetlParser.AssignmentContext context)
     {
@@ -172,6 +174,40 @@ public class TetlVisitor : TetlBaseVisitor<object?>
                     throw new TetlFunctionNotAvailableForThisTypeException()
                     {
                         ErrorMessage = "You can't use Remove function for this type!",
+                        Value = variable.GetType()
+                    };
+                }
+            }
+        }
+        else
+        {
+            throw new TetlVariableNotDefinedException()
+            {
+                ErrorMessage = $"Variable is not defined!",
+                Variable = $"variable: {varName}",
+            };
+        }
+    }
+    
+    private void ArrayReverse(string varName)
+    {
+        if (Variables.ContainsKey(varName))
+        {
+            var variable = Variables.GetValueOrDefault(varName);
+
+            if (variable != null)
+            {
+                if (variable.GetType().IsGenericType && variable is IEnumerable)
+                {
+                    var elements = variable as List<object?>;
+                    elements?.Reverse();
+                    Variables[varName] = elements;
+                }
+                else
+                {
+                    throw new TetlFunctionNotAvailableForThisTypeException()
+                    {
+                        ErrorMessage = "You can't use Reverse function for this type!",
                         Value = variable.GetType()
                     };
                 }

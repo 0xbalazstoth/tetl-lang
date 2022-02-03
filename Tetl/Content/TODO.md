@@ -9,7 +9,7 @@
 - [x] Delete element `Delete(2)`
 - [x] Update element `array[0] = 32`
 - [ ] Sort elements
-- [ ] Reverse elements
+- [x] Reverse elements
 
 ### Loops
 - [x] While

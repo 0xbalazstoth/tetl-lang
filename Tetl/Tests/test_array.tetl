@@ -36,3 +36,19 @@ while (i < array.Length())
     OutNewLine(array[i]);
     i = i + 1;
 }
+
+>> Reverse
+OutNewLine(">> Reverse");
+array = ["test", "blabla", "haha"];
+foreach (elem in array)
+{
+    OutNewLine(elem);
+}
+
+array.Reverse();
+OutNewLine(">> Reversed");
+
+foreach (elem in array)
+{
+    OutNewLine(elem);
+}
